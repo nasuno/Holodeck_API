@@ -1175,11 +1175,11 @@ End Enum
 
 Usage<br>
 For row margins (`Margin.Type = RowMargin`):<br>
-    newRow : Must be the target row index.<br>
-    newCol : Must be `Nothing`.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newRow : Must be the target row index.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newCol : Must be `Nothing`.<br>
 For column margins (`Margin.Type = ColumnMargin`):<br>
-    newCol : Must be the target column index.<br>
-    newRow : Must be `Nothing`.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newCol : Must be the target column index.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;newRow : Must be `Nothing`.<br>
 The margin **must not** be locked; locked margins cannot be moved.
 
 If you supply both `newRow` and `newCol`, or neither, an exception will be thrown.  
