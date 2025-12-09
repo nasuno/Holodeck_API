@@ -4,6 +4,7 @@
 
 
 ===
+
 API Method
 AddMyObjectToFactory
 
@@ -47,6 +48,7 @@ The default object color and additional properties are not settable through this
 
 
 ===
+
 API Method
 Bresenham3D
 
