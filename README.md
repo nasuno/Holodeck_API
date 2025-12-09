@@ -58,7 +58,7 @@ The default object color and additional properties are not settable through this
 
 API Method
 
-**Bresenham3D**
+**`Bresenham3D`**
 
 Signature
 ```vb
@@ -126,7 +126,7 @@ Works in any direction (handles negative slopes automatically).
 
 API Method
 
-**ThinEvenSpatiallyAdaptiveAuto**
+**`ThinEvenSpatiallyAdaptiveAuto`**
 
 Signature
 ```vb
@@ -185,7 +185,7 @@ If `sourceDict.Count <= numToLeave`, no thinning occurs.
 
 API Method
 
-**AddTriangle**
+**`AddTriangle`**
 
 Signature
 ```vb
@@ -252,7 +252,7 @@ Returned `triangleId` can be used with `trianglesById` for lookups.
 
 API Method
 
-**GetMyObjectByStructureId**
+**`GetMyObjectByStructureId`**
 
 Signature
 ```vb
@@ -327,7 +327,7 @@ End If
 
 API Method
 
-**GetNextUniqId**
+**`GetNextUniqId`**
 
 Signature
 ```vb
@@ -361,8 +361,8 @@ Safe to call from multiple threads concurrently.
 
 API Methods
 
-**GetObserverOrigin**
-**GetObserverUnitVector**
+**`GetObserverOrigin`**
+**`GetObserverUnitVector`**
 
 Both functions can be used independently or in combination for powerful spatial operations.
 
@@ -452,10 +452,10 @@ Place Marker in View
 
 API Methods (Panel Bounds)
 
-**GetPanelFurthestLeftColumn**
-**GetPanelFurthestTopRow**
-**GetPanelFurthestRightColumn**
-**GetPanelFurthestBottomRow**
+**`GetPanelFurthestLeftColumn`**
+**`GetPanelFurthestTopRow`**
+**`GetPanelFurthestRightColumn`**
+**`GetPanelFurthestBottomRow`**
 
 These API functions let your plugin query the visible grid boundaries of any panel in the 3D workspace:
 
@@ -512,8 +512,8 @@ End Enum
 
 API Methods
 
-**AssignZoneMarginSetA**
-**AssignZoneMarginSetB**
+**`AssignZoneMarginSetA`**
+**`AssignZoneMarginSetB`**
 
 Assign named *margin sets* to either the A or B "slot" for a spatial zone. 
 Later, you can swap or activate these sets independently for flexible layout/state control.
@@ -568,7 +568,7 @@ api.AssignZoneMarginSetB("zoneX", "AltLayout")
 
 API Method
 
-**CreateMarginSet**
+**`CreateMarginSet`**
 
 Signature
 ```vb
@@ -622,7 +622,7 @@ api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", 
 
 API Method
 
-**CreateSpatialZone**
+**`CreateSpatialZone`**
 
 Signature
 ```vb
@@ -734,7 +734,7 @@ Treat returned `ISpatialZone` as your control surface; internal implementation i
 
 API Method
 
-**GetSpatialZone**
+**`GetSpatialZone`**
 
 Signature
 ```vb
@@ -809,7 +809,7 @@ ISpatialZone members available
 
 API Method
 
-**GetAllMarginSetNames**
+**`GetAllMarginSetNames`**
 
 Signature
 ```vb
@@ -846,7 +846,7 @@ Use this API to coordinate layouts, perform swaps, or enumerate user choices.
 
 API Method
 
-**GetAllMarginIDs**
+**`GetAllMarginIDs`**
 
 Signature
 ```vb
@@ -911,7 +911,7 @@ Returns a snapshot; margins added/removed after the call won't appear.
 
 API Method
 
-**GetAllSpatialZones**
+**`GetAllSpatialZones`**
 
 Signature
 ```vb
@@ -956,7 +956,7 @@ Returned objects support:
 
 API Method
 
-**GetMarginInfoSnapshot**
+**`GetMarginInfoSnapshot`**
 
 Signature
 ```vb
@@ -1014,7 +1014,7 @@ API Enums
 
 API Method
 
-**GetMarginSet**
+**`GetMarginSet`**
 
 Signature
 ```vb
@@ -1053,7 +1053,7 @@ Use in conjunction with other host API features to achieve zone layout swapping,
 
 API Method
 
-**GetZoneAssignedMarginSet**
+**`GetZoneAssignedMarginSet`**
 
 Signature
 ```vb
@@ -1083,7 +1083,7 @@ Console.WriteLine("Active margin set for zone1: " & currentSet)
 
 API Method
 
-**CreateMargin**
+**`CreateMargin`**
 
 Add margins into the host application.
 Signature
@@ -1172,7 +1172,7 @@ Once created with `locked:=True`, the margin cannot be edited by users until unl
 
 API Method
 
-**MarginPlusOne**
+**`MarginPlusOne`**
 
 Incrementally move margins (either by row or by column) within the panel structure.
 
@@ -1215,7 +1215,7 @@ MarginPlusOne("right_col")
 
 API Method
 
-**MarginJump**
+**`MarginJump`**
 
 For moving margins (row or column) between panels and to specific positions.
 
@@ -1284,7 +1284,7 @@ MarginJump(
 
 API Property
 
-**objectDictionary**
+**`objectDictionary`**
 
 Signature
 ```vb
@@ -1311,7 +1311,7 @@ Populated via `api.AddMyObjectToFactory(x, y, z, structureId)` which returns the
 
 API Method
 
-**RemoveAllTrianglesInSet**
+**`RemoveAllTrianglesInSet`**
 
 Signature
 ```vb
@@ -1342,7 +1342,7 @@ Always call before `AddTriangle` when updating geometry each frame.
 
 API Method
 
-**RemoveMargin**
+**`RemoveMargin`**
 
 Signature
 ```vb
@@ -1368,7 +1368,7 @@ Removing a margin also disables its associated structure's visibility, unless lo
 
 API Method
 
-**RemoveObjectsByStructureId**
+**`RemoveObjectsByStructureId`**
 
 Signature
 ```vb
@@ -1401,7 +1401,7 @@ api.RemoveObjectsByStructureId(myStructureId)
 
 API Method
 
-**SetMarginLock**
+**`SetMarginLock`**
 
 Signature
 ```vb
@@ -1433,7 +1433,7 @@ When locked, margins are protected from being moved or deleted via UI or API.
 
 API Method
 
-**SetStructureDrawState**
+**`SetStructureDrawState`**
 
 Signature
 ```vb
@@ -1473,7 +1473,7 @@ Does not add or remove objects; only affects rendering.
 
 API Property
 
-**structureObjectIDs**
+**`structureObjectIDs`**
 
 Signature
 ```vb
@@ -1535,7 +1535,7 @@ Treat as read-only; do not add/remove directly.
 
 API Method
 
-**SwapZoneMarginSets**
+**`SwapZoneMarginSets`**
 
 ## Overview
 Toggles the active margin set for a spatial zone between two assigned sets-A and B. 
@@ -1571,8 +1571,8 @@ Avoid unless you're debugging or experimenting.
 
 API Method
 
-**AssignZoneMarginSetA**
-**AssignZoneMarginSetB**
+**`AssignZoneMarginSetA`**
+**`AssignZoneMarginSetB`**
 
 Concept
 Each spatial zone manages two "slots" for margin sets:
@@ -1608,7 +1608,7 @@ If zones are removed via `RemoveSpatialZone(zoneId)`, any plugin references to t
 
 API Method  ** WIP
 
-**ToggleMarginVisibility**
+**`ToggleMarginVisibility`**
 Sub ToggleMarginVisibility(marginId As String)
  
 Call
@@ -1631,7 +1631,7 @@ PluginApi.ToggleMarginVisibility("TopRow")
 
 API Property
 
-**triangleGroups**
+**`triangleGroups`**
 
 Signature
 ```vb
@@ -1695,7 +1695,7 @@ End If
 
 API Property
 
-**trianglesById**
+**`trianglesById`**
 
 Signature
 ```vb
