@@ -47,7 +47,7 @@ Next
 ``` 
 
 Notes
-
+<br>
 You don't need to track them if you are tracking the structureId. 
 The return is optional.
 The returned integer uniquely identifies the object and can be used for future reference.
@@ -58,7 +58,7 @@ The default object color and additional properties are not settable through this
 
 
 ===
-
+<br>
 API Method
 
 **`Bresenham3D`**
@@ -70,7 +70,7 @@ Function Bresenham3D(startX As Integer, startY As Integer, startZ As Integer,
 ```
 
 Purpose
-
+<br>
 Returns all integer grid points along a 3D line from start to end. 
 Useful for drawing lines, edges, or wireframes in discrete 3D space.
 
@@ -91,12 +91,12 @@ List(Of (Integer, Integer, Integer))
 ```
 
 Plugin use cases
-
+<br>
 Generate points for drawing 3D edges/wireframes. 
 Place objects along a line segment between two vertices. 
 
 Plugin access pattern
-
+<br>
 Draw an edge between two cube corners:
 ```vb
 Dim ptA As Vector3 = corners(0)
@@ -128,7 +128,7 @@ Works in any direction (handles negative slopes automatically).
 
 
 ===
-
+<br>
 API Method
 
 **`ThinEvenSpatiallyAdaptiveAuto`**
@@ -146,7 +146,7 @@ Sub ThinEvenSpatiallyAdaptiveAuto(
 ```
 
 Purpose
-
+<br>
 Thins a fully constructed scene down to `numToLeave` objects, preserving spatial distribution.
 Objects within `keepRadius` of the observer are always retained.
 Objects beyond `keepRadius` are grouped into distance bands; closer bands retain more objects.
@@ -171,10 +171,11 @@ api.ThinEvenSpatiallyAdaptiveAuto(
 ```
 
 When to call
-
+<br>
 Once, after all scene objects are constructed. 
 
 Algorithm summary
+<br>
 1. Objects within `keepRadius` -> always kept.
 2. Objects beyond -> assigned to distance bands. 
 3. Each band gets a weighted share of `numToLeave` (closer bands weighted higher).
@@ -189,7 +190,7 @@ If `sourceDict.Count <= numToLeave`, no thinning occurs.
 
 
 ===
-
+<br>
 API Method
 
 **`AddTriangle`**
