@@ -6,10 +6,11 @@
 ===
 <br>
 API Method
-
+<br>
 **`AddMyObjectToFactory`**
 
 Signature
+<br>
 ```vb
 Function AddMyObjectToFactory(x As Integer, y As Integer, z As Integer, structureId As Integer) As Integer
 ```
@@ -32,13 +33,15 @@ Integer
 Unique ID for the newly created object.
 
 Example Usage
-' Create an object at coordinates (100, 200, 300) associated with structure 5
+<br>
 ```vb
+' Create an object at coordinates (100, 200, 300) associated with structure 5
 Dim myObjectId As Integer
 myObjectId = api.AddMyObjectToFactory(100, 200, 300, 5)
 ```
 
 You may call this function multiple times to create multiple objects:
+<br>
 ```vb
 ' Create several objects along the X axis for structure 10
 For i = 0 To 9
@@ -60,10 +63,11 @@ The default object color and additional properties are not settable through this
 ===
 <br>
 API Method
-
+<br>
 **`Bresenham3D`**
 
 Signature
+<br>
 ```vb
 Function Bresenham3D(startX As Integer, startY As Integer, startZ As Integer,
                      endX As Integer, endY As Integer, endZ As Integer) As List(Of (Integer, Integer, Integer))
@@ -98,6 +102,7 @@ Place objects along a line segment between two vertices.
 Plugin access pattern
 <br>
 Draw an edge between two cube corners:
+<br>
 ```vb
 Dim ptA As Vector3 = corners(0)
 Dim ptB As Vector3 = corners(1)
@@ -130,7 +135,7 @@ Works in any direction (handles negative slopes automatically).
 ===
 <br>
 API Method
-
+<br>
 **`ThinEvenSpatiallyAdaptiveAuto`**
 
 Signature
@@ -164,6 +169,7 @@ Parameters
  `closeBiasExponent` | `Double`                                     | Higher = more objects kept near observer (default: 1.5) 
 
 Plugin usage
+<br>
 ```vb
 api.ThinEvenSpatiallyAdaptiveAuto(
     api.objectDictionary, Nothing, 30000,
@@ -192,10 +198,11 @@ If `sourceDict.Count <= numToLeave`, no thinning occurs.
 ===
 <br>
 API Method
-
+<br>
 **`AddTriangle`**
 
 Signature
+<br>
 ```vb
 Function AddTriangle(
     x1 As Double, y1 As Double, z1 As Double,
@@ -205,6 +212,7 @@ Function AddTriangle(
 ```
 
 Purpose
+<br>
 Registers a triangle for ray-occlusion / collision testing.
 Groups the triangle under `setId` for batch management.
 
@@ -217,6 +225,7 @@ Parameters
  `setId`      | `Integer`| Group identifier for this triangle 
 
 Returns
+<br>
 `Integer`: Unique `triangleId` assigned to the new triangle. 
 
 Plugin use cases
@@ -224,8 +233,9 @@ Define collision/occlusion surfaces for your objects.
 Update geometry each frame for moving/rotating objects.
 
 Plugin usage pattern
-
+<br>
 Add a single triangle:
+<br>
 ```vb
 Dim triId As Integer = api.AddTriangle(
     ax, ay, az,
@@ -235,12 +245,14 @@ Dim triId As Integer = api.AddTriangle(
 ```
 
 Add two triangles for a quad face:
+<br>
 ```vb
 api.AddTriangle(v0. X, v0.Y, v0.Z, v1.X, v1.Y, v1.Z, v2.X, v2.Y, v2. Z, mySetId)
 api.AddTriangle(v0. X, v0.Y, v0.Z, v2.X, v2.Y, v2.Z, v3. X, v3.Y, v3.Z, mySetId)
 ```
 
 Per-frame update (clear then rebuild):
+<br>
 ```vb
 api.RemoveAllTrianglesInSet(mySetId)
 ' Add triangles for current frame positions
@@ -249,6 +261,7 @@ api.AddTriangle(...)
 ```
 
 Notes
+<br>
 Use a stable `setId` per object/structure. 
 Returned `triangleId` can be used with `trianglesById` for lookups.
 
@@ -257,21 +270,24 @@ Returned `triangleId` can be used with `trianglesById` for lookups.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetMyObjectByStructureId`**
 
 Signature
+<br>
 ```vb
 Function GetMyObjectByStructureId(structureId As Integer) As MyObject
 ```
 
 Purpose
+<br>
 Retrieves a `MyObject` instance from the host's object dictionary by its structure ID.
 Returns `Nothing` if no object exists for the given ID.
 
 From the API
+<br>
 ```vb
 Public Class MyObject
     Public Property UniqIdentifier As Integer
@@ -306,12 +322,14 @@ End Class
 ```
 
 Example plugin use cases
+<br>
 Retrieve an object to inspect or modify its properties. 
 Check if an object exists before performing operations on it.
 
 Plugin access patterns
-
+<br>
 Retrieve an object by structure ID:
+<br>
 ```vb
 Dim obj As MyObject = api.GetMyObjectByStructureId(myStructureId)
 If obj IsNot Nothing Then
@@ -320,6 +338,7 @@ End If
 ```
 
 Check existence before operating:
+<br>
 ```vb
 Dim obj As MyObject = api.GetMyObjectByStructureId(myStructureId)
 If obj IsNot Nothing Then
@@ -332,9 +351,9 @@ End If
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetNextUniqId`**
 
 Signature
