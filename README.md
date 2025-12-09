@@ -7,7 +7,7 @@
 
 API Method
 
-`**AddMyObjectToFactory**`
+**`AddMyObjectToFactory`**
 
 Signature
 ```vb
