@@ -88,23 +88,12 @@ Generate points for drawing 3D edges/wireframes. <br>
 Place objects along a line segment between two vertices. 
 
 Plugin access pattern<br>
-Draw an edge between two cube corners:<br>
+Draw a line:<br>
 ```vb
-Dim ptA As Vector3 = corners(0)
-Dim ptB As Vector3 = corners(1)
-
-Dim ax As Integer = CInt(Math.Round(cubeCenter.X + ptA.X))
-Dim ay As Integer = CInt(Math. Round(cubeCenter.Y + ptA.Y))
-Dim az As Integer = CInt(Math.Round(cubeCenter.Z + ptA.Z))
-Dim bx As Integer = CInt(Math.Round(cubeCenter.X + ptB.X))
-Dim by As Integer = CInt(Math.Round(cubeCenter.Y + ptB.Y))
-Dim bz As Integer = CInt(Math.Round(cubeCenter.Z + ptB.Z))
-
-Dim pts = api.Bresenham3D(ax, ay, az, bx, by, bz)
+Dim pts = api. Bresenham3D(startX, startY, startZ, endX, endY, endZ)
 
 For Each pt In pts
-    ' pt.Item1 = X, pt.Item2 = Y, pt.Item3 = Z
-    Dim key As Integer = api.AddMyObjectToFactory(pt.Item1, pt. Item2, pt.Item3, myStructureId)
+    api.AddMyObjectToFactory(pt.Item1, pt. Item2, pt.Item3, myStructureId)
 Next
 ```
 
