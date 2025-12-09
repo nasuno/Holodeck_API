@@ -54,6 +54,9 @@ The default object color and additional properties are not settable through this
 
 
 
+
+
+
 ===
 
 API Method
@@ -122,6 +125,9 @@ Works in any direction (handles negative slopes automatically).
 
 
 
+
+
+
 ===
 
 API Method
@@ -176,6 +182,9 @@ Algorithm summary
 
 If `sourceDict.Count <= numToLeave`, no thinning occurs.
 `destDict` is currently unused; pass `Nothing`.
+
+
+
 
 
 
@@ -243,6 +252,9 @@ api.AddTriangle(...)
 Notes
 Use a stable `setId` per object/structure. 
 Returned `triangleId` can be used with `trianglesById` for lookups.
+
+
+
 
 
 
@@ -323,6 +335,9 @@ End If
 
 
 
+
+
+
 ===
 
 API Method
@@ -352,6 +367,9 @@ Dim myUniqueId As Integer = api.GetNextUniqId()
 
 IDs are sequential and never recycled within a session.
 Safe to call from multiple threads concurrently.
+
+
+
 
 
 
@@ -448,6 +466,9 @@ Place Marker in View
 
 
 
+
+
+
 ===
 
 API Methods (Panel Bounds)
@@ -503,6 +524,9 @@ Public Enum PanelType
     TopPanel
 End Enum
 ```
+
+
+
 
 
 
@@ -564,6 +588,9 @@ api.AssignZoneMarginSetB("zoneX", "AltLayout")
 
 
 
+
+
+
 ===
 
 API Method
@@ -613,6 +640,9 @@ api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", 
 ```
 
 **Overwrites**: If `setName` already exists, it is replaced.
+
+
+
 
 
 
@@ -730,6 +760,9 @@ Treat returned `ISpatialZone` as your control surface; internal implementation i
 
 
 
+
+
+
 ===
 
 API Method
@@ -805,6 +838,9 @@ ISpatialZone members available
 
 
 
+
+
+
 ===
 
 API Method
@@ -837,6 +873,9 @@ Useful for toggling layouts or configurations (see "A/B margin sets" design else
 **Tip:**  
 Margin set names are shared across spatial zones and plugin instances.  
 Use this API to coordinate layouts, perform swaps, or enumerate user choices.
+
+
+
 
 
 
@@ -907,6 +946,9 @@ Returns a snapshot; margins added/removed after the call won't appear.
 
 
 
+
+
+
 ===
 
 API Method
@@ -947,6 +989,9 @@ Returned objects support:
 - Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.
 - Each returned zone exposes margins, boundaries, and customizable text.
 - Disposing a zone stops host tracking-but .NET references may still affect state.WIP
+
+
+
 
 
 
@@ -1010,6 +1055,9 @@ API Enums
 
 
 
+
+
+
 ===
 
 API Method
@@ -1049,6 +1097,9 @@ Use in conjunction with other host API features to achieve zone layout swapping,
 
 
 
+
+
+
 ===
 
 API Method
@@ -1074,6 +1125,9 @@ Usage Pattern
 Dim currentSet As String = api.GetZoneAssignedMarginSet("zone1")
 Console.WriteLine("Active margin set for zone1: " & currentSet)
 ```
+
+
+
 
 
 
@@ -1168,6 +1222,9 @@ Once created with `locked:=True`, the margin cannot be edited by users until unl
 
 
 
+
+
+
 ===
 
 API Method
@@ -1206,6 +1263,9 @@ Move a Column Margin forward
 MarginPlusOne("right_col")
 ' Result: Moves "right_col" to column 1 (or wraps to Adjacent panel if out of bounds).
 ```
+
+
+
 
 
 
@@ -1280,6 +1340,9 @@ MarginJump(
 
 
 
+
+
+
 ===
 
 API Property
@@ -1302,6 +1365,9 @@ ConcurrentDictionary(Of Integer, MyObject)
  Value:  MyObject instance
 
 Populated via `api.AddMyObjectToFactory(x, y, z, structureId)` which returns the object's key.
+
+
+
 
 
 
@@ -1338,6 +1404,9 @@ Always call before `AddTriangle` when updating geometry each frame.
 
 
 
+
+
+
 ===
 
 API Method
@@ -1359,6 +1428,9 @@ api.RemoveMargin("TopRow")
 ```
 
 Removing a margin also disables its associated structure's visibility, unless locked.
+
+
+
 
 
 
@@ -1397,6 +1469,9 @@ api.RemoveObjectsByStructureId(myStructureId)
 
 
 
+
+
+
 ===
 
 API Method
@@ -1424,6 +1499,9 @@ api.SetMarginLock("myMarginId", False)
 ```
 
 When locked, margins are protected from being moved or deleted via UI or API.
+
+
+
 
 
 
@@ -1464,6 +1542,9 @@ api. SetStructureDrawState(myStructureId, False)
 Notes
 Default state is `True` (visible) when objects are first added via `AddMyObjectToFactory`. 
 Does not add or remove objects; only affects rendering.
+
+
+
 
 
 
@@ -1531,6 +1612,9 @@ Treat as read-only; do not add/remove directly.
 
 
 
+
+
+
 ===
 
 API Method
@@ -1562,6 +1646,9 @@ api.SwapZoneMarginSets("zone1")
 Swapping after removal
 Using swapping methods on disposed zone references is possible but risky (unmanaged state, leaks). 
 Avoid unless you're debugging or experimenting.
+
+
+
 
 
 
@@ -1604,6 +1691,9 @@ If zones are removed via `RemoveSpatialZone(zoneId)`, any plugin references to t
 
 
 
+
+
+
 ===
 
 API Method  ** WIP
@@ -1622,6 +1712,9 @@ A margin name string (e.g., `"TopRow"`, `"LeftColumn"`)
 
 Usage Example
 PluginApi.ToggleMarginVisibility("TopRow")
+
+
+
 
 
 
@@ -1691,6 +1784,9 @@ End If
 
 
 
+
+
+
 ===
 
 API Property
@@ -1724,6 +1820,9 @@ If api.trianglesById.TryGetValue(triangleId, tri) Then
     ' Use tri.A, tri.B, tri.C for geometry or ray tests
 End If
 ```
+
+
+
 
 
 
