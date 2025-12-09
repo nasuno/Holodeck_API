@@ -501,7 +501,7 @@ Signatures<br>
 ```vb
 Sub AssignZoneMarginSetA(zoneId As String, setName As String)
 Sub AssignZoneMarginSetB(zoneId As String, setName As String)
-```<br>
+```
  `zoneId` = ID of the target spatial zone.<br>
  `setName` = Name of the margin set (must already be created).
 
@@ -513,7 +513,7 @@ Assign Margin Sets to Zone Slots<br>
 ```vb
 api.AssignZoneMarginSetA("zone1", "SetA")
 api.AssignZoneMarginSetB("zone1", "SetB")
-```<br>
+```
  "SetA" is now in A slot; "SetB" in B slot for zone "zone1".
 
 **Activate or Swap Sets (Not covered here)**<br>
@@ -822,7 +822,7 @@ Retrieves all registered margin IDs, categorized by type (row or column).
 Return type<br>
 ```vb
 Dictionary(Of String, List(Of String))
-```<br>
+```
  Key:    "row" or "column"<br>
  Value:  List of margin ID strings
 
@@ -1235,7 +1235,7 @@ Central registry of all `MyObject` instances in the host.
 Value type<br>
 ```vb
 ConcurrentDictionary(Of Integer, MyObject)
-```<br>
+```
  Key:    object ID (Integer)<br>
  Value:  MyObject instance
 
@@ -1411,7 +1411,7 @@ Allows plugins to query which objects belong to a specific structure.
 Value type<br>
 ```vb
 ConcurrentDictionary(Of Integer, ImmutableList(Of Integer))
-```<br>
+```
  Key:    structureId (Integer)
  Value:  ImmutableList of objectIds (Integer)
 
