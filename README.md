@@ -16,9 +16,11 @@ Function AddMyObjectToFactory(x As Integer, y As Integer, z As Integer, structur
 ```
 
 Creates a new object at the given 3D coordinates and associates it with a specified structure. 
+<br>
 Returns a unique identifier for the created object.
 
 Parameters
+<br>
   Name         | Type     | Description                               
 ---------------|----------|-------------
  `x`           | Integer  | X coordinate for the new object's location
@@ -52,8 +54,11 @@ Next
 Notes
 <br>
 You don't need to track them if you are tracking the structureId. 
+<br>
 The return is optional.
+<br>
 The returned integer uniquely identifies the object and can be used for future reference.
+<br>
 The default object color and additional properties are not settable through this API call; only position and structure.
 
 
@@ -76,9 +81,11 @@ Function Bresenham3D(startX As Integer, startY As Integer, startZ As Integer,
 Purpose
 <br>
 Returns all integer grid points along a 3D line from start to end. 
+<br>
 Useful for drawing lines, edges, or wireframes in discrete 3D space.
 
 Parameters
+<br>
   Name    |  Typ      | Description 
 ----------|-----------|-------------
  `startX` | `Integer` | Starting X coordinate 
@@ -97,6 +104,7 @@ List(Of (Integer, Integer, Integer))
 Plugin use cases
 <br>
 Generate points for drawing 3D edges/wireframes. 
+<br>
 Place objects along a line segment between two vertices. 
 
 Plugin access pattern
@@ -153,11 +161,15 @@ Sub ThinEvenSpatiallyAdaptiveAuto(
 Purpose
 <br>
 Thins a fully constructed scene down to `numToLeave` objects, preserving spatial distribution.
+<br>
 Objects within `keepRadius` of the observer are always retained.
+<br>
 Objects beyond `keepRadius` are grouped into distance bands; closer bands retain more objects.
+<br>
 **Call once after scene construction, before frame processing begins.**
 
 Parameters
+<br>
   Name               |  Type                                        | Description 
 ---------------------|----------------------------------------------|-------------
  `sourceDict`        | `ConcurrentDictionary(Of Integer, MyObject)` | Collection to thin; modified in-place 
@@ -183,12 +195,17 @@ Once, after all scene objects are constructed.
 Algorithm summary
 <br>
 1. Objects within `keepRadius` -> always kept.
+<br>
 2. Objects beyond -> assigned to distance bands. 
+<br>
 3. Each band gets a weighted share of `numToLeave` (closer bands weighted higher).
+<br>
 4. Within each band, a 3D grid bins objects; one per cell is kept.
+<br>
 5. Remaining quota filled randomly; unselected objects removed from `sourceDict`.
 
 If `sourceDict.Count <= numToLeave`, no thinning occurs.
+
 `destDict` is currently unused; pass `Nothing`.
 
 
@@ -214,9 +231,11 @@ Function AddTriangle(
 Purpose
 <br>
 Registers a triangle for ray-occlusion / collision testing.
+<br>
 Groups the triangle under `setId` for batch management.
 
 Parameters
+<br>
   Name        | Type     | Description 
 --------------|----------|-------------
  `x1, y1, z1` | `Double` | Vertex A position (X, Y, Z) 
@@ -229,7 +248,9 @@ Returns
 `Integer`: Unique `triangleId` assigned to the new triangle. 
 
 Plugin use cases
+<br>
 Define collision/occlusion surfaces for your objects.
+<br>
 Update geometry each frame for moving/rotating objects.
 
 Plugin usage pattern
@@ -263,6 +284,7 @@ api.AddTriangle(...)
 Notes
 <br>
 Use a stable `setId` per object/structure. 
+<br>
 Returned `triangleId` can be used with `trianglesById` for lookups.
 
 
@@ -284,6 +306,7 @@ Function GetMyObjectByStructureId(structureId As Integer) As MyObject
 Purpose
 <br>
 Retrieves a `MyObject` instance from the host's object dictionary by its structure ID.
+<br>
 Returns `Nothing` if no object exists for the given ID.
 
 From the API
@@ -324,6 +347,7 @@ End Class
 Example plugin use cases
 <br>
 Retrieve an object to inspect or modify its properties. 
+<br>
 Check if an object exists before performing operations on it.
 
 Plugin access patterns
@@ -365,6 +389,7 @@ Function GetNextUniqId() As Integer
 Purpose
 <br>
 Returns a globally unique integer ID. 
+<br>
 Thread-safe; uses `Interlocked.Increment` internally.
 
 Return
@@ -374,14 +399,19 @@ Return
 Plugin use cases
 <br>
 Generate unique keys for custom dictionaries or tracking structures.
+<br>
 Create stable IDs for plugin-managed objects that need cross-reference.
 
 Plugin access pattern
 <br>
 Get a unique ID:
+<br>
+```vb
 Dim myUniqueId As Integer = api.GetNextUniqId()
+```
 
 IDs are sequential and never recycled within a session.
+<br>
 Safe to call from multiple threads concurrently.
 
 
@@ -393,6 +423,7 @@ Safe to call from multiple threads concurrently.
 API Methods
 <br>
 **`GetObserverOrigin`**
+<br>
 **`GetObserverUnitVector`**
 
 Both functions can be used independently or in combination for powerful spatial operations.
@@ -409,13 +440,15 @@ The observer's 3D position as a tuple `(X, Y, Z)`.
 
 Solo Usage Examples
 <br>
-Query Current Location
+Query Current Location:
+<br>
 ```vb
    Dim pos = api.GetObserverOrigin()
    Console.WriteLine($"Observer is at: ({pos.Item1}, {pos.Item2}, {pos.Item3})")
 ```
 
-Region Check
+Region Check:
+<br>
 ```vb
    Dim pos = api.GetObserverOrigin()
    If pos.Item1 >= 0 And pos.Item2 >= 0 And pos.Item3 >= 0 Then
@@ -447,14 +480,16 @@ It's common to use both origin and unit vector for spatial operations requiring 
 
 Examples
 <br>
-Raycasting / Picking
+Raycasting / Picking:
+<br>
 ```vb
    Dim origin = api.GetObserverOrigin()
    Dim direction = api.GetObserverUnitVector()
    Dim hit = Raycast(origin, direction)
 ```
 
-Move Observer Forward
+Move Observer Forward:
+<br>
 ```vb
    Dim origin = api.GetObserverOrigin()
    Dim direction = api.GetObserverUnitVector()
@@ -466,7 +501,8 @@ Move Observer Forward
    )
 ```
 
-Place Marker in View
+Place Marker in View:
+<br>
 ```vb
    Dim origin = api.GetObserverOrigin()
    Dim direction = api.GetObserverUnitVector()
@@ -488,13 +524,17 @@ Place Marker in View
 API Methods (Panel Bounds)
 <br>
 **`GetPanelFurthestLeftColumn`**
+<br>
 **`GetPanelFurthestTopRow`**
+<br>
 **`GetPanelFurthestRightColumn`**
+<br>
 **`GetPanelFurthestBottomRow`**
 
 These API functions let your plugin query the visible grid boundaries of any panel in the 3D workspace:
 
 Signatures
+<br>
 <br>
 ```vb
 ' Returns the index of the furthest (minimum) column of the panel grid.
@@ -513,6 +553,7 @@ Function GetPanelFurthestBottomRow(panel As PanelType) As Integer
 Parameters
 <br>
 `panel As PanelType`
+<br>
  Valid values: `TopPanel`, `BottomPanel`, `NorthPanel`, `SouthPanel`, `EastPanel`, `WestPanel`
 
 Tip
@@ -552,9 +593,11 @@ End Enum
 API Methods
 <br>
 **`AssignZoneMarginSetA`**
+<br>
 **`AssignZoneMarginSetB`**
 
 Assign named *margin sets* to either the A or B "slot" for a spatial zone. 
+<br>
 Later, you can swap or activate these sets independently for flexible layout/state control.
 
 Signatures
@@ -565,11 +608,13 @@ Sub AssignZoneMarginSetB(zoneId As String, setName As String)
 ```
 <br>
  `zoneId` = ID of the target spatial zone.
+<br>
  `setName` = Name of the margin set (must already be created).
 
 Usage
 <br>
 Create Margin Sets
+<br>
 Use host API to define and name your margin sets.
 
 Assign Margin Sets to Zone Slots
@@ -582,20 +627,27 @@ api.AssignZoneMarginSetB("zone1", "SetB")
  "SetA" is now in A slot; "SetB" in B slot for zone "zone1".
 
 **Activate or Swap Sets (Not covered here)**
+<br>
    - Use host API to activate or swap which set is currently displayed:
+<br>
      - `SwitchZoneToMarginSetA(zoneId)`
+<br>
      - `SwitchZoneToMarginSetB(zoneId)`
+<br>
      - `SwapZoneMarginSets(zoneId)`  ' toggle active slot
 
 Concept
 <br>
 Each spatial zone has **two slots** (A + B), each holding a margin set name.
+<br>
 You can *assign*, *activate*, or *swap* which slot is currently in use.
+<br>
 "Swapping" only toggles which slot is active-it does NOT change the slot contents.
 
 Margin sets 
 <br>
 Must be created first and their names must be valid.
+<br>
 Slots are just pointers to margin set names-swapping doesn't modify the sets.
 
 Quick Sample
@@ -624,6 +676,7 @@ Sub CreateMarginSet(setName As String, topRowMarginId As String, bottomRowMargin
 Purpose
 <br>
 Creates or overwrites a **named margin set** associating margin identifiers for layout purposes.  
+<br>
 A margin set consists of **two row margins (top/bottom)** and **two column margins (left/right)**.
 
 Usage
@@ -634,9 +687,13 @@ api.CreateMarginSet("SetA", "SetA_TopRow", "SetA_BottomRow", "SetA_LeftColumn", 
 ```
 
 - `setName`: Arbitrary name for this logical grouping (e.g., "SetA").
+<br>
 - `topRowMarginId`: Name/id of top row margin (as created before).
+<br>
 - `bottomRowMarginId`: Name/id of bottom row margin.
+<br>
 - `leftColumnMarginId`: Name/id of left column margin.
+<br>
 - `rightColumnMarginId`: Name/id of right column margin.
 
 Calling `CreateMarginSet` **overwrites** any set with the same name.
@@ -644,6 +701,7 @@ Calling `CreateMarginSet` **overwrites** any set with the same name.
 Margin IDs
 <br>
 Margins must be created first, e.g., `'SetA_TopRow'` or `'Zone3_LeftColumn'`, using `api.CreateMargin`.
+<br>
 Margin IDs are unique, descriptive strings made during margin creation.
 
 Example Pattern
@@ -684,9 +742,11 @@ Function CreateSpatialZone(zoneId As String) As ISpatialZone
 Purpose
 <br>
 Creates (or retrieves) a named spatial zone for rendering text and UI elements on a panel. 
+<br>
 Returns an `ISpatialZone` interface for configuring and querying the zone. 
 
 Parameters
+<br>
   Name    |  Type    | Description 
 ----------|----------|-------------
  `zoneId` | `String` | Unique identifier for the zone 
@@ -698,6 +758,7 @@ Returns
 ISpatialZone Members
 <br>
 Properties (read-only unless noted)
+<br>
  Name           |  Type                                                        | Description 
 --------------------|--------------------------------------------------------------|-------------
  `ID`               | `String`                                                     | The zone's unique identifier 
@@ -728,6 +789,7 @@ zone.Text = "Hello World"
 ```
 
 Position the zone using margins ** UpdateMargins is old. Not sure if it works independent of sets MUST TEST   WIP?
+<br>
 zone.UpdateMargins("LeftMarginId", "RightMarginId", "TopMarginId", "BottomMarginId")
 
 Query zone bounds
@@ -778,7 +840,9 @@ zone.SetGutterVisible(0, 1, "above", False)  ' Hide it
 What Happens if I Remove a Zone?
 <br>
 If you call `api.RemoveSpatialZone(zoneId)`, the host disposes the zone.
+<br>
 Your plugin reference to the zone object may still exist ("zombie" zone)-use with caution! WIP
+<br>
 Operations after removal may not be tracked by the host and can lead to resource leaks or surprising behavior.
 
 **Use zone references only while zone is alive/managed.**
@@ -786,7 +850,9 @@ Operations after removal may not be tracked by the host and can lead to resource
 Notes
 <br>
 Zone is created once per `zoneId`; subsequent calls return the existing zone.
+<br>
 Collision triangles are managed internally via `UpdateCollisionTriangles()` when margins change.
+<br>
 Treat returned `ISpatialZone` as your control surface; internal implementation is hidden.
 
 
@@ -816,8 +882,11 @@ ISpatialZone   ' or Nothing if not found
 Plugin use cases
 <br>
 Retrieve a zone created earlier (via `api.CreateSpatialZone`).
+<br>
 Access zone properties (bounds, text, bounding box).
+<br>
 Manipulate zone state (margins, text, gutter visibility). 
+<br>
 Build a zone pool for reuse across plugin logic.
 
 Plugin access patterns
@@ -904,12 +973,15 @@ Get all available margin set names:
 Context: What is a Margin Set?
 <br>
 A *margin set* groups named "margin" objects, typically for layout or spatial zone customization.
+<br>
 Each set is referenced by a unique string name.
+<br>
 Useful for toggling layouts or configurations (see "A/B margin sets" design elsewhere).
 
 **Tip:**  
 <br>
 Margin set names are shared across spatial zones and plugin instances.  
+<br>
 Use this API to coordinate layouts, perform swaps, or enumerate user choices.
 
 
@@ -939,12 +1011,15 @@ Dictionary(Of String, List(Of String))
 ```
 <br>
  Key:    "row" or "column"
+<br>
  Value:  List of margin ID strings
 
 Plugin use cases
 <br>
 Discover all existing margins in the host. 
+<br>
 Enumerate row margins separately from column margins.
+<br>
 Use retrieved IDs with other margin-related API calls.
 
 Plugin access patterns
@@ -1017,20 +1092,29 @@ What is an `ISpatialZone`?
 Returned objects support:
 <br>
 - **Properties:**
+<br>
     - `Left`, `Right`, `Top`, `Bottom` *(Integer)*: Boundaries of this zone.
+<br>
     - `Text` *(String, RW)*: Info/label field for display or annotation.
+<br>
     - `ID` *(String)*: Unique zone identifier.
 
 - **Methods:**
+<br>
     - `UpdateMargins(leftId, rightId, topId, bottomId)`: Change zone margin assignment.
+<br>
     - `DisposeZone()`: Remove the zone from host management (see below tip).
+<br>
     - `GetAllFontSegments()`: List of font grid segments (tuples).
+<br>
     - `SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
 
 (Quick Notes)
 <br>
 - Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.
+<br>
 - Each returned zone exposes margins, boundaries, and customizable text.
+<br>
 - Disposing a zone stops host tracking-but .NET references may still affect state.WIP
 
 
@@ -1056,11 +1140,13 @@ Retrieve a snapshot of margin properties for a given margin ID.
 Returns
 <br>
 .NET Dictionary(Of String, Object)` containing margin details.
+<br>
 If `marginId` is invalid/unknown, returns `Nothing`.
 
 Structure
 <br>
 The returned dictionary may include the following keys (properties are all present, 
+<br>
 but `Row`/`Column` may be `Nothing` depending on margin type):
 <br>
   Key          | Type                  | Description                                          
@@ -1089,9 +1175,11 @@ Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
 API Enums
 <br>
 **PanelType**:  
+<br>
 `BottomPanel`, `NorthPanel`, `EastPanel`, `SouthPanel`, `WestPanel`, `TopPanel`
 
 **MarginType**:  
+<br>
 `RowMargin`, `ColumnMargin`
 
 
@@ -1125,6 +1213,7 @@ Returns
 `Dictionary(Of String, String)` containing margin assignments:
 
  Always includes keys: `"TopRow"`, `"BottomRow"`, `"LeftColumn"`, `"RightColumn"`
+<br>
  Each value is the margin ID used by the set.
 
 Example
@@ -1292,25 +1381,31 @@ Sub MarginPlusOne(marginId As String)
 ```
 
 MarginPlusOne` moves a margin (either a row or a column margin) forward by one position in its respective direction:
+<br>
 For **RowMargin**, it moves the margin to the next row.
+<br>
 For **ColumnMargin**, it moves the margin to the next column.
 
 If moving the margin goes out of range for the current panel, 
+<br>
 the API automatically wraps the margin to the adjacent panel on the appropriate side 
+<br>
 (top/bottom for rows, left/right for columns) using 3D cube adjacency logic.
 
 The API internally checks the `Margin.Type` to choose to increment the row or the column.
 
 Example Usages
-
-Move a Row Margin forward
+<br>
+Move a Row Margin forward:
+<br>
 ```vb
 ' Suppose margin "top_row" is a RowMargin currently at TopPanel, row 1.
 MarginPlusOne("top_row")
 ' Result: Moves "top_row" to row 2 (or wraps to Adjacent panel if out of bounds).
 ```
 
-Move a Column Margin forward
+Move a Column Margin forward:
+<br>
 ```vb
 ' Suppose margin "right_col" is a ColumnMargin currently at RightPanel, column 0.
 MarginPlusOne("right_col")
@@ -1322,14 +1417,15 @@ MarginPlusOne("right_col")
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`MarginJump`**
 
 For moving margins (row or column) between panels and to specific positions.
 
 Signature
+<br>
 ```vb
 Sub MarginJump(
     marginId As String,
@@ -1340,6 +1436,7 @@ Sub MarginJump(
 ```
 
 API Enum: PanelType
+<br>
 ```vb
 Public Enum PanelType
     BottomPanel
@@ -1352,19 +1449,27 @@ End Enum
 ```
 
 Usage
+<br>
 For row margins (`Margin.Type = RowMargin`):
+<br>
  newRow : Must be the target row index.
+<br>
  newCol : Must be `Nothing`.
+<br>
 For column margins (`Margin.Type = ColumnMargin`):
+<br>
  newCol : Must be the target column index.
+<br>
  newRow : Must be `Nothing`.
+<br>
 The margin **must not** be locked; locked margins cannot be moved.
 
 If you supply both `newRow` and `newCol`, or neither, an exception will be thrown.  
 
 Example
-
-Move a Row Margin
+<br>
+Move a Row Margin:
+<br>
 ```vb
 ' Move row margin "margin_row_1" to row 3 in the EastPanel
 MarginJump(
@@ -1375,7 +1480,8 @@ MarginJump(
 )
 ```
 
-Move a Column Margin
+Move a Column Margin:
+<br>
 ```vb
 ' Move column margin "margin_col_99" to column 2 in the SouthPanel
 MarginJump(
@@ -1391,24 +1497,29 @@ MarginJump(
 
 
 ===
-
+<br>
 API Property
-
+<br>
 **`objectDictionary`**
 
 Signature
+<br>
 ```vb
 ReadOnly Property objectDictionary As ConcurrentDictionary(Of Integer, MyObject)
 ```
 
 Purpose
+<br>
 Central registry of all `MyObject` instances in the host. 
 
 Value type
+<br>
 ```vb
 ConcurrentDictionary(Of Integer, MyObject)
 ```
+<br>
  Key:    object ID (Integer)
+<br>
  Value:  MyObject instance
 
 Populated via `api.AddMyObjectToFactory(x, y, z, structureId)` which returns the object's key.
@@ -1418,30 +1529,37 @@ Populated via `api.AddMyObjectToFactory(x, y, z, structureId)` which returns the
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`RemoveAllTrianglesInSet`**
 
 Signature
+<br>
 ```vb
 Sub RemoveAllTrianglesInSet(setId As Integer)
 ```
 
 Purpose
+<br>
 Removes all triangles belonging to the specified `setId` from the host's collision/occlusion system.
 
 Plugin use cases 
+<br>
 Clear old triangles before adding updated geometry for a new frame.
+<br>
 Remove an object's collision mesh when the object is destroyed or hidden. 
 
 Plugin usage pattern
+<br>
 ```vb
 api.RemoveAllTrianglesInSet(mySetId)
 ```
 
 Notes
+<br>
 Safe to call even if `setId` has no triangles (no-op).
+<br>
 Always call before `AddTriangle` when updating geometry each frame.
 
 
@@ -1449,12 +1567,13 @@ Always call before `AddTriangle` when updating geometry each frame.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`RemoveMargin`**
 
 Signature
+<br>
 ```vb
 Sub RemoveMargin(marginId As String)
 ```
@@ -1464,6 +1583,7 @@ Removes the margin identified by `marginId` from the host application.
 Removes the specified margin** from the manager if it exists and is **not locked**.
 
 Usage Example
+<br>
 ```vb
 api.RemoveMargin("TopRow")
 ```
@@ -1475,30 +1595,37 @@ Removing a margin also disables its associated structure's visibility, unless lo
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`RemoveObjectsByStructureId`**
 
 Signature
+<br>
 ```vb
 Sub RemoveObjectsByStructureId(structureId As Integer)
 ```
 
 Purpose
+<br>
 Removes all objects associated with a given `structureId` from the host. 
+<br>
 Cleans up the object dictionary, structure-to-object mappings, and draw state.
 
 What it clears
+<br>
 All object IDs in `structureObjectIDs(structureId)` are removed from `objectDictionary`.
 
 Plugin use cases
+<br>
 Clean up all visual objects for a structure when unloading or resetting.
+<br>
 Remove an entire object group before rebuilding it with new geometry. 
 
 Plugin usage pattern
 
 Remove all objects for a structure:
+<br>
 ```vb
 api.RemoveObjectsByStructureId(myStructureId)
 ```
@@ -1508,27 +1635,31 @@ api.RemoveObjectsByStructureId(myStructureId)
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`SetMarginLock`**
 
 Signature
+<br>
 ```vb
 Sub SetMarginLock(marginId As String, lockState As Boolean)
 ```
 
 Purpose
+<br>
 Locks or unlocks a margin, controlling whether it is moveable or removable.
 
 Usage
-
+<br>
 Lock a Margin (prevent move/removal):
+<br>
 ```vb
 api.SetMarginLock("myMarginId", True)
 ```
 
 Unlock a Margin (allow move/removal):
+<br>
 ```vb
 api.SetMarginLock("myMarginId", False)
 ```
@@ -1540,39 +1671,49 @@ When locked, margins are protected from being moved or deleted via UI or API.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`SetStructureDrawState`**
 
 Signature
+<br>
 ```vb
 Sub SetStructureDrawState(structureId As Integer, isOn As Boolean)
 ```
 
 Purpose
+<br>
 Controls whether objects belonging to a `structureId` are drawn by the host.
+<br>
 Toggle visibility on/off without removing objects from the registry.
 
 Plugin use cases
+<br>
 Hide a structure temporarily (e.g., during transitions or when off-screen).
+<br>
 Show a structure when it becomes active or enters view.
+<br>
 Toggle debug/overlay geometry on and off.
 
 Plugin usage patterns
-
+<br>
 Enable drawing for a structure:
+<br>
 ```vb
 api.SetStructureDrawState(myStructureId, True)
 ```
 
 Disable drawing for a structure:
+<br>
 ```vb
 api. SetStructureDrawState(myStructureId, False)
 ```
 
 Notes
+<br>
 Default state is `True` (visible) when objects are first added via `AddMyObjectToFactory`. 
+<br>
 Does not add or remove objects; only affects rendering.
 
 
@@ -1580,30 +1721,36 @@ Does not add or remove objects; only affects rendering.
 
 
 ===
-
+<br>
 API Property
-
+<br>
 **`structureObjectIDs`**
 
 Signature
+<br>
 ```vb
 ReadOnly Property structureObjectIDs As ConcurrentDictionary(Of Integer, ImmutableList(Of Integer))
 ```
 
 Purpose
+<br>
 Maps each `structureId` to an immutable list of `objectId` values belonging to that structure. 
+<br>
 Allows plugins to query which objects belong to a specific structure.
 
 Value type
+<br>
 ```vb
 ConcurrentDictionary(Of Integer, ImmutableList(Of Integer))
 ```
+<br>
  Key:    structureId (Integer)
  Value:  ImmutableList of objectIds (Integer)
 
 Plugin access patterns
-
+<br>
 Check if a structure has objects:
+<br>
 ```vb
 Dim objIds As ImmutableList(Of Integer) = Nothing
 If api.structureObjectIDs.TryGetValue(myStructureId, objIds) Then
@@ -1612,6 +1759,7 @@ End If
 ```
 
 Iterate all object IDs in a structure:
+<br>
 ```vb
 Dim objIds As ImmutableList(Of Integer) = Nothing
 If api.structureObjectIDs.TryGetValue(myStructureId, objIds) Then
@@ -1623,6 +1771,7 @@ End If
 ```
 
 Get object data via cross-reference:
+<br>
 ```vb
 Dim objIds As ImmutableList(Of Integer) = Nothing
 If api.structureObjectIDs.TryGetValue(myStructureId, objIds) Then
@@ -1642,35 +1791,45 @@ Treat as read-only; do not add/remove directly.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`SwapZoneMarginSets`**
 
 ## Overview
+<br>
 Toggles the active margin set for a spatial zone between two assigned sets-A and B. 
+<br>
 Use this when building plugins that need to "flip" zone layouts.
 
 Concept
+<br>
 Each spatial zone manages two "slots" for margin sets:
+<br>
  MarginSetA** (often for "primary" layout)
+<br>
  MarginSetB** (for "alternate" layout)
 
 Calling `SwapZoneMarginSets(zoneId)` toggles which set is currently active in the specified zone.
 
 Usage
-
+<br>
 Swap active margin set in zone "zone1":
+<br>
 ```vb
 api.SwapZoneMarginSets("zone1")
 ```
 
  If currently showing A, toggles to B.
+<br>
  If currently showing B, toggles to A.
+<br>
  Does **not** change which set names are assigned to A/B; only switches between them.
 
 Swapping after removal
+<br>
 Using swapping methods on disposed zone references is possible but risky (unmanaged state, leaks). 
+<br>
 Avoid unless you're debugging or experimenting.
 
 
@@ -1678,24 +1837,31 @@ Avoid unless you're debugging or experimenting.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`AssignZoneMarginSetA`**
+<br>
 **`AssignZoneMarginSetB`**
 
 Concept
+<br>
 Each spatial zone manages two "slots" for margin sets:
+<br>
  MarginSetA** (often for "primary" layout)
+<br>
  MarginSetB** (for "alternate" layout)
 
 These calls will *always* switch the zone to show the assigned MarginSetA or MarginSetB, regardless of current state.
+<br>
 Use these explicit switches to always control which zone margin set is shown.
+<br>
 They are your direct route for "show this layout now".
 
 Common Usage Patterns
-
+<br>
 Assign sets, then force a switch:
+<br>
 ```vb
 api.AssignZoneMarginSetA("zone1", "SetA")
 api.AssignZoneMarginSetB("zone1", "SetB")
@@ -1708,16 +1874,16 @@ If you want a simple toggle between two layouts, see `SwapZoneMarginSets(zoneId)
 
 Switching is *stateless*: the slot assignment does **not** change. The displayed margins update according to the current slot.
 
-If zones are removed via `RemoveSpatialZone(zoneId)`, any plugin references to the zone object may still work (but the host won’t track them). Avoid manipulating "zombie" zones unless truly necessary.WIP
+If zones are removed via `RemoveSpatialZone(zoneId)`, any plugin references to the zone object may still work (but the host won't track them). Avoid manipulating "zombie" zones unless truly necessary.WIP
 
 
 <br><br><br><br>
 
 
 ===
-
+<br>
 API Method  ** WIP
-
+<br>
 **`ToggleMarginVisibility`**
 Sub ToggleMarginVisibility(marginId As String)
  
@@ -1738,35 +1904,44 @@ PluginApi.ToggleMarginVisibility("TopRow")
 
 
 ===
-
+<br>
 API Property
-
+<br>
 **`triangleGroups`**
 
 Signature
+<br>
 ```vb
 ReadOnly Property triangleGroups As Object   ' actually: ConcurrentDictionary(Of Integer, ConcurrentBag(Of Integer))
 ```
 
 Purpose
+<br>
 Maps each `setId` to a bag of `triangleId` values belonging to that set. 
+<br>
 Allows plugins to query which triangles belong to a specific set.
 
 Value type (implementation)
+<br>
 ```vb
 ConcurrentDictionary(Of Integer, ConcurrentBag(Of Integer))
 ```
  Key:    setId (Integer)
+<br>
  Value:  bag of triangleIds (Integer)
 
 Plugin use cases
+<br>
 Check if a set exists (has any triangles registered). 
+<br>
 Retrieve all triangle IDs for a given set.
+<br>
 Cross-reference with `trianglesById` to get full triangle geometry.
 
 Plugin access patterns
-
+<br>
 Check if a set has triangles:
+<br>
 ```vb
 Dim triangleIds As ConcurrentBag(Of Integer) = Nothing
 If api.triangleGroups.TryGetValue(mySetId, triangleIds) Then
@@ -1775,6 +1950,7 @@ End If
 ```
 
 Iterate all triangle IDs in a set:
+<br>
 ```vb
 Dim triangleIds As ConcurrentBag(Of Integer) = Nothing
 If api.triangleGroups.TryGetValue(mySetId, triangleIds) Then
@@ -1785,6 +1961,7 @@ End If
 ```
 
 Get triangle geometry via cross-reference:
+<br>
 ```vb
 Dim triangleIds As ConcurrentBag(Of Integer) = Nothing
 If api.triangleGroups.TryGetValue(mySetId, triangleIds) Then
@@ -1802,22 +1979,25 @@ End If
 
 
 ===
-
+<br>
 API Property
-
+<br>
 **`trianglesById`**
 
 Signature
+<br>
 ```vb
 ReadOnly Property trianglesById As Object   ' actually: ConcurrentDictionary(Of Integer, Triangle)
 ```
 
 Purpose
-
+<br>
 Exposes the host's triangle registry for ray-occlusion / collision tests.
+<br>
 Dictionary is keyed by `TriangleId`; values are `Triangle` records.
 
 Triangle layout
+<br>
 ```vb
 Structure Triangle
     Public A As (Double, Double, Double)
@@ -1829,6 +2009,7 @@ End Structure
 ```
 
 Typical access pattern (read-only)
+<br>
 ```vb
 Dim tri As Triangle
 If api.trianglesById.TryGetValue(triangleId, tri) Then
