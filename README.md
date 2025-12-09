@@ -192,16 +192,11 @@ When to call
 <br>
 Once, after all scene objects are constructed. 
 
-Algorithm summary
-<br>
-1. Objects within `keepRadius` -> always kept.
-<br>
-2. Objects beyond -> assigned to distance bands. 
-<br>
-3. Each band gets a weighted share of `numToLeave` (closer bands weighted higher).
-<br>
-4. Within each band, a 3D grid bins objects; one per cell is kept.
-<br>
+Algorithm summary<br>
+1. Objects within `keepRadius` -> always kept.<br>
+2. Objects beyond -> assigned to distance bands. <br>
+3. Each band gets a weighted share of `numToLeave` (closer bands weighted higher).<br>
+4. Within each band, a 3D grid bins objects; one per cell is kept.<br>
 5. Remaining quota filled randomly; unselected objects removed from `sourceDict`.
 
 If `sourceDict.Count <= numToLeave`, no thinning occurs.
