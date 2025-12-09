@@ -1,6 +1,6 @@
 
 
-
+<br><br><br><br>
 
 
 ===
@@ -51,10 +51,7 @@ The returned integer uniquely identifies the object and can be used for future r
 The default object color and additional properties are not settable through this API call; only position and structure.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -122,10 +119,7 @@ Returns points inclusive of both start and end.
 Works in any direction (handles negative slopes automatically).
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -184,10 +178,7 @@ If `sourceDict.Count <= numToLeave`, no thinning occurs.
 `destDict` is currently unused; pass `Nothing`.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -254,10 +245,7 @@ Use a stable `setId` per object/structure.
 Returned `triangleId` can be used with `trianglesById` for lookups.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -332,10 +320,7 @@ End If
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -369,10 +354,7 @@ IDs are sequential and never recycled within a session.
 Safe to call from multiple threads concurrently.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -463,10 +445,7 @@ Place Marker in View
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -526,10 +505,7 @@ End Enum
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -585,10 +561,7 @@ api.AssignZoneMarginSetB("zoneX", "AltLayout")
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -642,10 +615,7 @@ api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", 
 **Overwrites**: If `setName` already exists, it is replaced.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -757,10 +727,7 @@ Collision triangles are managed internally via `UpdateCollisionTriangles()` when
 Treat returned `ISpatialZone` as your control surface; internal implementation is hidden.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -835,10 +802,7 @@ ISpatialZone members available
  `DisposeZone()`         | `Sub`                            | Clean up zone resources 
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -875,10 +839,7 @@ Margin set names are shared across spatial zones and plugin instances.
 Use this API to coordinate layouts, perform swaps, or enumerate user choices.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -943,10 +904,7 @@ Next
 Returns a snapshot; margins added/removed after the call won't appear. 
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -991,10 +949,7 @@ Returned objects support:
 - Disposing a zone stops host tracking-but .NET references may still affect state.WIP
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1052,10 +1007,7 @@ API Enums
 `RowMargin`, `ColumnMargin`
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1094,10 +1046,7 @@ Example
 Use in conjunction with other host API features to achieve zone layout swapping, alternate views, or custom UI logic.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1127,10 +1076,7 @@ Console.WriteLine("Active margin set for zone1: " & currentSet)
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1219,10 +1165,7 @@ Locked State
 Once created with `locked:=True`, the margin cannot be edited by users until unlocked.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1265,10 +1208,7 @@ MarginPlusOne("right_col")
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1337,10 +1277,7 @@ MarginJump(
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1367,10 +1304,7 @@ ConcurrentDictionary(Of Integer, MyObject)
 Populated via `api.AddMyObjectToFactory(x, y, z, structureId)` which returns the object's key.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1401,10 +1335,7 @@ Safe to call even if `setId` has no triangles (no-op).
 Always call before `AddTriangle` when updating geometry each frame.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1430,10 +1361,7 @@ api.RemoveMargin("TopRow")
 Removing a margin also disables its associated structure's visibility, unless locked.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1466,10 +1394,7 @@ api.RemoveObjectsByStructureId(myStructureId)
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1501,10 +1426,7 @@ api.SetMarginLock("myMarginId", False)
 When locked, margins are protected from being moved or deleted via UI or API.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1544,10 +1466,7 @@ Default state is `True` (visible) when objects are first added via `AddMyObjectT
 Does not add or remove objects; only affects rendering.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1609,10 +1528,7 @@ End If
 Treat as read-only; do not add/remove directly.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1648,10 +1564,7 @@ Using swapping methods on disposed zone references is possible but risky (unmana
 Avoid unless you're debugging or experimenting.
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1688,10 +1601,7 @@ Switching is *stateless*: the slot assignment does **not** change. The displayed
 If zones are removed via `RemoveSpatialZone(zoneId)`, any plugin references to the zone object may still work (but the host won’t track them). Avoid manipulating "zombie" zones unless truly necessary.WIP
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1714,10 +1624,7 @@ Usage Example
 PluginApi.ToggleMarginVisibility("TopRow")
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1781,10 +1688,7 @@ End If
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
@@ -1822,10 +1726,7 @@ End If
 ```
 
 
-
-
-
-
+<br><br><br><br>
 
 
 ===
