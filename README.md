@@ -4,7 +4,7 @@
 
 
 ===
-
+<br>
 API Method
 
 **`AddMyObjectToFactory`**
@@ -26,9 +26,9 @@ Parameters
  `structureId` | Integer  | The structure group to associate with      
 
 Returns
-
-Integer
 <br>
+Integer
+<br><br>
 Unique ID for the newly created object.
 
 Example Usage
