@@ -357,23 +357,27 @@ API Method
 **`GetNextUniqId`**
 
 Signature
+<br>
 ```vb
 Function GetNextUniqId() As Integer
 ```
 
 Purpose
+<br>
 Returns a globally unique integer ID. 
 Thread-safe; uses `Interlocked.Increment` internally.
 
-Return value
+Return
+<br>
 `Integer`: next available unique ID (increments with each call).
 
 Plugin use cases
+<br>
 Generate unique keys for custom dictionaries or tracking structures.
 Create stable IDs for plugin-managed objects that need cross-reference.
 
 Plugin access pattern
-
+<br>
 Get a unique ID:
 Dim myUniqueId As Integer = api.GetNextUniqId()
 
@@ -385,24 +389,26 @@ Safe to call from multiple threads concurrently.
 
 
 ===
-
+<br>
 API Methods
-
+<br>
 **`GetObserverOrigin`**
 **`GetObserverUnitVector`**
 
 Both functions can be used independently or in combination for powerful spatial operations.
 
 Signature
+<br>
 ```vb
 Function GetObserverOrigin() As (Integer, Integer, Integer)
 ```
 
 Returns
+<br>
 The observer's 3D position as a tuple `(X, Y, Z)`.
 
 Solo Usage Examples
-
+<br>
 Query Current Location
 ```vb
    Dim pos = api.GetObserverOrigin()
@@ -418,15 +424,17 @@ Region Check
 ```
 
 Signature
+<br>
 ```vb
 Function GetObserverUnitVector() As (Double, Double, Double)
 ```
 
 Returns
+<br>
 The observer's facing direction as a unit vector `(X, Y, Z)`.
 
 Solo Usage Example
-
+<br>
 ```vb
 Query Facing Direction
    Dim dir = api.GetObserverUnitVector()
@@ -434,11 +442,11 @@ Query Facing Direction
 ```
 
 Use Together
-
+<br>
 It's common to use both origin and unit vector for spatial operations requiring both an origin and a direction.
 
 Examples
-
+<br>
 Raycasting / Picking
 ```vb
    Dim origin = api.GetObserverOrigin()
@@ -476,9 +484,9 @@ Place Marker in View
 
 
 ===
-
+<br>
 API Methods (Panel Bounds)
-
+<br>
 **`GetPanelFurthestLeftColumn`**
 **`GetPanelFurthestTopRow`**
 **`GetPanelFurthestRightColumn`**
@@ -487,6 +495,7 @@ API Methods (Panel Bounds)
 These API functions let your plugin query the visible grid boundaries of any panel in the 3D workspace:
 
 Signatures
+<br>
 ```vb
 ' Returns the index of the furthest (minimum) column of the panel grid.
 Function GetPanelFurthestLeftColumn(panel As PanelType) As Integer
@@ -502,14 +511,16 @@ Function GetPanelFurthestBottomRow(panel As PanelType) As Integer
 ```
 
 Parameters
+<br>
 `panel As PanelType`
  Valid values: `TopPanel`, `BottomPanel`, `NorthPanel`, `SouthPanel`, `EastPanel`, `WestPanel`
 
 Tip
+<br>
 Use these methods to locate the edges ("walls") of a panel when laying out margins, grid objects, or managing adjacency.
 
 Example Usage
-
+<br>
 ```vb
 Dim leftCol   As Integer = api.GetPanelFurthestLeftColumn(PanelType.TopPanel)
 Dim topRow    As Integer = api.GetPanelFurthestTopRow(PanelType.TopPanel)
@@ -520,6 +531,7 @@ Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType.TopPanel)
 This example retrieves the full grid limits for the Top panel.
 
 API Enum
+<br>
 ```vb
 Public Enum PanelType
     BottomPanel
@@ -536,9 +548,9 @@ End Enum
 
 
 ===
-
+<br>
 API Methods
-
+<br>
 **`AssignZoneMarginSetA`**
 **`AssignZoneMarginSetB`**
 
@@ -546,24 +558,27 @@ Assign named *margin sets* to either the A or B "slot" for a spatial zone.
 Later, you can swap or activate these sets independently for flexible layout/state control.
 
 Signatures
+<br>
 ```vb
 Sub AssignZoneMarginSetA(zoneId As String, setName As String)
 Sub AssignZoneMarginSetB(zoneId As String, setName As String)
 ```
-
+<br>
  `zoneId` = ID of the target spatial zone.
  `setName` = Name of the margin set (must already be created).
 
 Usage
-
+<br>
 Create Margin Sets
 Use host API to define and name your margin sets.
 
 Assign Margin Sets to Zone Slots
+<br>
 ```vb
 api.AssignZoneMarginSetA("zone1", "SetA")
 api.AssignZoneMarginSetB("zone1", "SetB")
 ```
+<br>
  "SetA" is now in A slot; "SetB" in B slot for zone "zone1".
 
 **Activate or Swap Sets (Not covered here)**
@@ -573,15 +588,18 @@ api.AssignZoneMarginSetB("zone1", "SetB")
      - `SwapZoneMarginSets(zoneId)`  ' toggle active slot
 
 Concept
+<br>
 Each spatial zone has **two slots** (A + B), each holding a margin set name.
 You can *assign*, *activate*, or *swap* which slot is currently in use.
 "Swapping" only toggles which slot is active-it does NOT change the slot contents.
 
 Margin sets 
+<br>
 Must be created first and their names must be valid.
 Slots are just pointers to margin set names-swapping doesn't modify the sets.
 
 Quick Sample
+<br>
 ```vb
 api.AssignZoneMarginSetA("zoneX", "MainLayout")
 api.AssignZoneMarginSetB("zoneX", "AltLayout")
@@ -592,21 +610,24 @@ api.AssignZoneMarginSetB("zoneX", "AltLayout")
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`CreateMarginSet`**
 
 Signature
+<br>
 ```vb
 Sub CreateMarginSet(setName As String, topRowMarginId As String, bottomRowMarginId As String, leftColumnMarginId As String, rightColumnMarginId As String)
 ```
 
 Purpose
+<br>
 Creates or overwrites a **named margin set** associating margin identifiers for layout purposes.  
 A margin set consists of **two row margins (top/bottom)** and **two column margins (left/right)**.
 
 Usage
+<br>
 ```vb
 ' Create top/bottom/left/right margins first (not shown here)
 api.CreateMarginSet("SetA", "SetA_TopRow", "SetA_BottomRow", "SetA_LeftColumn", "SetA_RightColumn")
@@ -621,12 +642,14 @@ api.CreateMarginSet("SetA", "SetA_TopRow", "SetA_BottomRow", "SetA_LeftColumn", 
 Calling `CreateMarginSet` **overwrites** any set with the same name.
 
 Margin IDs
+<br>
 Margins must be created first, e.g., `'SetA_TopRow'` or `'Zone3_LeftColumn'`, using `api.CreateMargin`.
 Margin IDs are unique, descriptive strings made during margin creation.
 
 Example Pattern
-
+<br>
 ' Step 1: Create margins (names must match your Set call)
+<br>
 ```vb
 api.CreateMargin("SetB_TopRow", MarginType.RowMargin, PanelType.TopPanel, 40, Nothing, False)
 api.CreateMargin("SetB_BottomRow", MarginType.RowMargin, PanelType.TopPanel, 50, Nothing, False)
@@ -635,6 +658,7 @@ api.CreateMargin("SetB_RightColumn", MarginType.ColumnMargin, PanelType.TopPanel
 ```
 
 ' Step 2: Create the margin set
+<br>
 ```vb
 api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", "SetB_RightColumn")
 ```
@@ -646,17 +670,19 @@ api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", 
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`CreateSpatialZone`**
 
 Signature
+<br>
 ```vb
 Function CreateSpatialZone(zoneId As String) As ISpatialZone
 ```
 
 Purpose
+<br>
 Creates (or retrieves) a named spatial zone for rendering text and UI elements on a panel. 
 Returns an `ISpatialZone` interface for configuring and querying the zone. 
 
@@ -666,10 +692,11 @@ Parameters
  `zoneId` | `String` | Unique identifier for the zone 
 
 Returns
+<br>
 `ISpatialZone` - adapter exposing zone properties and methods. 
 
 ISpatialZone Members
-
+<br>
 Properties (read-only unless noted)
  Name           |  Type                                                        | Description 
 --------------------|--------------------------------------------------------------|-------------
@@ -683,6 +710,7 @@ Properties (read-only unless noted)
  `BoundingBoxAABB`  | `((Integer, Integer, Integer), (Integer, Integer, Integer))` | Min/max 3D corners 
 
 Methods
+<br>
   Method                                               | Description 
 -------------------------------------------------------|-------------
  `UpdateMargins(leftId, rightId, topId, bottomId)`     | Reposition zone using margin IDs 
@@ -691,8 +719,9 @@ Methods
  `DisposeZone()`        <-- ** DO NOT USE **           | Clean up zone resources  ** WIP just set margins all 0/Nothing Nothing/0
 
 Plugin Usage
-
+<br>
 Create a zone and set text
+<br>
 ```vb
 Dim zone As ISpatialZone = api.CreateSpatialZone("MyZone")
 zone.Text = "Hello World"
@@ -702,6 +731,7 @@ Position the zone using margins ** UpdateMargins is old. Not sure if it works in
 zone.UpdateMargins("LeftMarginId", "RightMarginId", "TopMarginId", "BottomMarginId")
 
 Query zone bounds
+<br>
 ```vb
 Dim left As Integer = zone.Left
 Dim right As Integer = zone.Right
@@ -710,6 +740,7 @@ Dim bottom As Integer = zone.Bottom
 ```
 
 Get the 3D bounding box
+<br>
 ```vb
 Dim aabb = zone.BoundingBoxAABB
 Dim minCorner = aabb.Item1  ' (minX, minY, minZ)
@@ -717,6 +748,7 @@ Dim maxCorner = aabb.Item2  ' (maxX, maxY, maxZ)
 ```
 
 Iterate characters by grid position
+<br>
 ```vb
 For Each kvp In zone.WrappedCharIndex
     Dim row As Integer = kvp.Key. Item1
@@ -727,6 +759,7 @@ Next
 ```
 
 Get all font segment positions
+<br>
 ```vb
 Dim segments As List(Of (Integer, Integer)) = zone.GetAllFontSegments()
 For Each seg In segments
@@ -736,12 +769,14 @@ Next
 ```
 
 Toggle gutter visibility  
+<br>
 ```vb
 zone.SetGutterVisible(0, 1, "above", True)   ' Show gutter above cell (0,1)
 zone.SetGutterVisible(0, 1, "above", False)  ' Hide it
 ```
 
 What Happens if I Remove a Zone?
+<br>
 If you call `api.RemoveSpatialZone(zoneId)`, the host disposes the zone.
 Your plugin reference to the zone object may still exist ("zombie" zone)-use with caution! WIP
 Operations after removal may not be tracked by the host and can lead to resource leaks or surprising behavior.
@@ -749,6 +784,7 @@ Operations after removal may not be tracked by the host and can lead to resource
 **Use zone references only while zone is alive/managed.**
 
 Notes
+<br>
 Zone is created once per `zoneId`; subsequent calls return the existing zone.
 Collision triangles are managed internally via `UpdateCollisionTriangles()` when margins change.
 Treat returned `ISpatialZone` as your control surface; internal implementation is hidden.
@@ -758,31 +794,36 @@ Treat returned `ISpatialZone` as your control surface; internal implementation i
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetSpatialZone`**
 
 Signature
+<br>
 ```vb
 Function GetSpatialZone(zoneId As String) As ISpatialZone
 ```
 
 Purpose
+<br>
 Retrieves an existing spatial zone by its ID.
 
-Return type
+Return
+<br>
 ISpatialZone   ' or Nothing if not found
 
 Plugin use cases
+<br>
 Retrieve a zone created earlier (via `api.CreateSpatialZone`).
 Access zone properties (bounds, text, bounding box).
 Manipulate zone state (margins, text, gutter visibility). 
 Build a zone pool for reuse across plugin logic.
 
 Plugin access patterns
-
+<br>
 Retrieve a zone:
+<br>
 ```vb
 Dim zone As ISpatialZone = api. GetSpatialZone("myZoneId")
 If zone IsNot Nothing Then
@@ -791,6 +832,7 @@ End If
 ```
 
 Access zone properties:
+<br>
 ```vb
 Dim zone As ISpatialZone = api.GetSpatialZone("myZoneId")
 If zone IsNot Nothing Then
@@ -804,6 +846,7 @@ End If
 ```
 
 Read/write zone text:
+<br>
 ```vb
 Dim zone As ISpatialZone = api.GetSpatialZone("myZoneId")
 If zone IsNot Nothing Then
@@ -813,6 +856,7 @@ End If
 ```
 
 ISpatialZone members available
+<br>
   Member                 |  Type                            | Description 
 -------------------------|----------------------------------|-------------
  `ID`                    | `String`                         | Zone identifier 
@@ -833,21 +877,23 @@ ISpatialZone members available
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetAllMarginSetNames`**
 
 Signature
+<br>
 ```vb
 Function GetAllMarginSetNames() As List(Of String)
 ```
 
 Returns
+<br>
 A list of strings with the names of all currently defined margin sets in the host.
 
 Usage
-
+<br>
 ```vb
 Get all available margin set names:
     Dim marginSets = api.GetAllMarginSetNames()
@@ -856,12 +902,13 @@ Get all available margin set names:
 ```
 
 Context: What is a Margin Set?
-
+<br>
 A *margin set* groups named "margin" objects, typically for layout or spatial zone customization.
 Each set is referenced by a unique string name.
 Useful for toggling layouts or configurations (see "A/B margin sets" design elsewhere).
 
 **Tip:**  
+<br>
 Margin set names are shared across spatial zones and plugin instances.  
 Use this API to coordinate layouts, perform swaps, or enumerate user choices.
 
@@ -870,33 +917,38 @@ Use this API to coordinate layouts, perform swaps, or enumerate user choices.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetAllMarginIDs`**
 
 Signature
+<br>
 ```vb
 Function GetAllMarginIDs() As Dictionary(Of String, List(Of String))
 ```
 
 Purpose
+<br>
 Retrieves all registered margin IDs, categorized by type (row or column). 
 
 Return type
+<br>
 ```vb
 Dictionary(Of String, List(Of String))
 ```
+<br>
  Key:    "row" or "column"
  Value:  List of margin ID strings
 
 Plugin use cases
+<br>
 Discover all existing margins in the host. 
 Enumerate row margins separately from column margins.
 Use retrieved IDs with other margin-related API calls.
 
 Plugin access patterns
-
+<br>
 Get all margin IDs:
 ```vb
 Dim allMargins = api.GetAllMarginIDs()
@@ -905,6 +957,7 @@ Dim columnMargins As List(Of String) = allMargins("column")
 ```
 
 Check if any row margins exist:
+<br>
 ```vb
 Dim allMargins = api.GetAllMarginIDs()
 If allMargins("row").Count > 0 Then
@@ -913,6 +966,7 @@ End If
 ```
 
 Iterate all row margin IDs:
+<br>
 ```vb
 Dim allMargins = api. GetAllMarginIDs()
 For Each marginId As String In allMargins("row")
@@ -921,6 +975,7 @@ Next
 ```
 
 Iterate all column margin IDs:
+<br>
 ```vb
 Dim allMargins = api.GetAllMarginIDs()
 For Each marginId As String In allMargins("column")
@@ -935,12 +990,13 @@ Returns a snapshot; margins added/removed after the call won't appear.
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetAllSpatialZones`**
 
 Signature
+<br>
 ```vb
 Function GetAllSpatialZones() As IEnumerable(Of ISpatialZone)
 ' Returns all current zones managed by the host.
@@ -949,6 +1005,7 @@ Function GetAllSpatialZones() As IEnumerable(Of ISpatialZone)
 Returns a list (or enumerable) of spatial zone objects (`ISpatialZone`).
 
 Typical Usage
+<br>
 ```vb
 For Each zone As ISpatialZone In api.GetAllSpatialZones()
     Console.WriteLine(zone.ID & ": " & zone.Text)
@@ -956,9 +1013,9 @@ Next
 ```
 
 What is an `ISpatialZone`?
-
+<br>
 Returned objects support:
-
+<br>
 - **Properties:**
     - `Left`, `Right`, `Top`, `Bottom` *(Integer)*: Boundaries of this zone.
     - `Text` *(String, RW)*: Info/label field for display or annotation.
@@ -971,6 +1028,7 @@ Returned objects support:
     - `SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
 
 (Quick Notes)
+<br>
 - Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.
 - Each returned zone exposes margins, boundaries, and customizable text.
 - Disposing a zone stops host tracking-but .NET references may still affect state.WIP
@@ -980,27 +1038,31 @@ Returned objects support:
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetMarginInfoSnapshot`**
 
 Signature
+<br>
 ```vb
 Function GetMarginInfoSnapshot(marginId As String) As Dictionary(Of String, Object)
 ```
 
 Purpose
+<br>
 Retrieve a snapshot of margin properties for a given margin ID.
 
 Returns
+<br>
 .NET Dictionary(Of String, Object)` containing margin details.
 If `marginId` is invalid/unknown, returns `Nothing`.
 
 Structure
+<br>
 The returned dictionary may include the following keys (properties are all present, 
 but `Row`/`Column` may be `Nothing` depending on margin type):
-
+<br>
   Key          | Type                  | Description                                          
  ------------- | --------------------- | ------------
  `ID`          | String                | Margin unique ID (name).                             
@@ -1012,12 +1074,11 @@ but `Row`/`Column` may be `Nothing` depending on margin type):
  `Column`      | Integer? (nullable)   | Column index if type is `ColumnMargin`, else `Nothing`.
 
 Usage Example
+<br>
 ```vb
 Dim marginInfo = api.GetMarginInfoSnapshot("RightColumn")
-```
 
 ' Sample property access:
-```vb
 Dim isLocked As Boolean = CBool(marginInfo("Locked"))
 Dim marginType As MarginType = CType(marginInfo("Type"), MarginType)
 Dim panel As PanelType = CType(marginInfo("Panel"), PanelType)
@@ -1026,7 +1087,7 @@ Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
 ```
 
 API Enums
-
+<br>
 **PanelType**:  
 `BottomPanel`, `NorthPanel`, `EastPanel`, `SouthPanel`, `WestPanel`, `TopPanel`
 
@@ -1038,30 +1099,36 @@ API Enums
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetMarginSet`**
 
 Signature
+<br>
 ```vb
 Function GetMarginSet(setName As String) As Dictionary(Of String, String)
 ```
 
 Purpose
+<br>
 Retrieve the contents of a named margin set.
 
 Usage
-
+<br>
 Input
+<br>
 `setName`: Name of the margin set (as specified during setup).
 
 Returns
+<br>
 `Dictionary(Of String, String)` containing margin assignments:
+
  Always includes keys: `"TopRow"`, `"BottomRow"`, `"LeftColumn"`, `"RightColumn"`
  Each value is the margin ID used by the set.
 
 Example
+<br>
 ```vb
     Dim marginSet = api.GetMarginSet("SetA")
     ' marginSet("TopRow")       => the margin ID for the top row
@@ -1077,26 +1144,31 @@ Use in conjunction with other host API features to achieve zone layout swapping,
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`GetZoneAssignedMarginSet`**
 
 Signature
+<br>
 ```vb
 Function GetZoneAssignedMarginSet(zoneId As String) As String
 ```
 
 Purpose
+<br>
 Returns the name of the _currently active margin set_ assigned to the specified spatial zone.
 
 Input
+<br>
 `zoneId` (String): The ID of the spatial zone you wish to query.
 
 Returns
+<br>
 (String): Name of the active margin set (`"SetA"`, `"SetB"`, etc.), or `Nothing` if the zone is not found or no set is assigned.
 
-Usage Pattern
+Usage
+<br>
 ```vb
 Dim currentSet As String = api.GetZoneAssignedMarginSet("zone1")
 Console.WriteLine("Active margin set for zone1: " & currentSet)
@@ -1107,13 +1179,15 @@ Console.WriteLine("Active margin set for zone1: " & currentSet)
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`CreateMargin`**
 
 Add margins into the host application.
+
 Signature
+<br>
 ```vb
 Sub CreateMargin(
     marginId As String,
@@ -1126,6 +1200,7 @@ Sub CreateMargin(
 ```
 
 Parameters
+<br>
  Name        | Type          | Description 
 -------------|---------------|-------------
  marginId    | String        | Unique identifier for the new margin. Ensure this is unique across the project. 
@@ -1137,6 +1212,7 @@ Parameters
 
 
 API Enum
+<br>
 ```vb
 Public Enum MarginType
     RowMargin
@@ -1145,6 +1221,7 @@ End Enum
 ```
 
 API Enum
+<br>
 ```vb
 Public Enum PanelType
     BottomPanel
@@ -1157,8 +1234,9 @@ End Enum
 ```
 
 Example Usages
-
-Adding a Row Margin
+<br>
+Adding a Row Margin:
+<br>
 ```vb
 CreateMargin(
     marginId:="my_unique_row_margin",
@@ -1170,7 +1248,8 @@ CreateMargin(
 )
 ```
 
-Adding a Column Margin
+Adding a Column Margin:
+<br>
 ```vb
 CreateMargin(
     marginId:="my_unique_column_margin",
@@ -1183,12 +1262,15 @@ CreateMargin(
 ```
 
 Visibility
+<br>
 Margins are not visible by default on creation. ** WIP dissabled for latency. waiting for drawing tools.
 
 IDs
+<br>
 Each `marginId` must be unique.
 
 Locked State
+<br>
 Once created with `locked:=True`, the margin cannot be edited by users until unlocked.
 
 
@@ -1196,14 +1278,15 @@ Once created with `locked:=True`, the margin cannot be edited by users until unl
 
 
 ===
-
+<br>
 API Method
-
+<br>
 **`MarginPlusOne`**
 
 Incrementally move margins (either by row or by column) within the panel structure.
 
 Signature
+<br>
 ```vb
 Sub MarginPlusOne(marginId As String)
 ```
