@@ -26,7 +26,9 @@ Parameters
  `structureId` | Integer  | The structure group to associate with      
 
 Returns
+
 Integer
+
 Unique ID for the newly created object.
 
 Example Usage
@@ -45,6 +47,7 @@ Next
 ``` 
 
 Notes
+
 You don't need to track them if you are tracking the structureId. 
 The return is optional.
 The returned integer uniquely identifies the object and can be used for future reference.
@@ -67,6 +70,7 @@ Function Bresenham3D(startX As Integer, startY As Integer, startZ As Integer,
 ```
 
 Purpose
+
 Returns all integer grid points along a 3D line from start to end. 
 Useful for drawing lines, edges, or wireframes in discrete 3D space.
 
@@ -87,6 +91,7 @@ List(Of (Integer, Integer, Integer))
 ```
 
 Plugin use cases
+
 Generate points for drawing 3D edges/wireframes. 
 Place objects along a line segment between two vertices. 
 
@@ -141,6 +146,7 @@ Sub ThinEvenSpatiallyAdaptiveAuto(
 ```
 
 Purpose
+
 Thins a fully constructed scene down to `numToLeave` objects, preserving spatial distribution.
 Objects within `keepRadius` of the observer are always retained.
 Objects beyond `keepRadius` are grouped into distance bands; closer bands retain more objects.
@@ -165,6 +171,7 @@ api.ThinEvenSpatiallyAdaptiveAuto(
 ```
 
 When to call
+
 Once, after all scene objects are constructed. 
 
 Algorithm summary
@@ -1703,6 +1710,7 @@ ReadOnly Property trianglesById As Object   ' actually: ConcurrentDictionary(Of 
 ```
 
 Purpose
+
 Exposes the host's triangle registry for ray-occlusion / collision tests.
 Dictionary is keyed by `TriangleId`; values are `Triangle` records.
 
