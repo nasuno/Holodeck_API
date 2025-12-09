@@ -77,7 +77,8 @@ Parameters<br>
  `endY`   | `Integer` | Ending Y coordinate 
  `endZ`   | `Integer` | Ending Z coordinate 
 
-Returns```vb
+Returns<br>
+```vb
 List(Of (Integer, Integer, Integer))
 ' Each tuple is (X, Y, Z) for a point along the line
 ```
