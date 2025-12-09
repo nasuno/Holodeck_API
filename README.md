@@ -923,7 +923,9 @@ Purpose<br>
 Retrieve a snapshot of margin properties for a given margin ID.
 
 Returns<br>
-.NET Dictionary(Of String, Object)` containing margin details.<br>
+```vb
+.NET Dictionary(Of String, Object)` containing margin details.
+```
 If `marginId` is invalid/unknown, returns `Nothing`.
 
 Structure<br>
