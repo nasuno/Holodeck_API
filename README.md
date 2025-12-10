@@ -1480,8 +1480,8 @@ Avoid unless you're debugging or experimenting.
 
 &nbsp;&nbsp;Concept<br>
 Each spatial zone manages two "slots" for margin sets:<br>
- MarginSetA** (often for "primary" layout)<br>
- MarginSetB** (for "alternate" layout)
+&nbsp;&nbsp;&nbsp;&nbsp;MarginSetA** (often for "primary" layout)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MarginSetB** (for "alternate" layout)
 
 These calls will *always* switch the zone to show the assigned MarginSetA or MarginSetB, regardless of current state.<br>
 Use these explicit switches to always control which zone margin set is shown.<br>
