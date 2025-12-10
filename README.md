@@ -364,7 +364,7 @@ Region Check:<br>
    End If
 ```
 
-&nbsp;&nbsp;ignature<br>
+&nbsp;&nbsp;Signature<br>
 ```vb
 Function GetObserverUnitVector() As (Double, Double, Double)
 ```
