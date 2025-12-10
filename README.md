@@ -60,7 +60,7 @@ The default object color and additional properties are not settable through this
 &nbsp;&nbsp;Signature<br>
 ```vb
 Function Bresenham3D(startX As Integer, startY As Integer, startZ As Integer,
-                     endX As Integer, endY As Integer, endZ As Integer) As List(Of (Integer, Integer, Integer))
+          endX As Integer, endY As Integer, endZ As Integer) As List(Of (Integer, Integer, Integer))
 ```
 
 &nbsp;&nbsp;Purpose<br>
