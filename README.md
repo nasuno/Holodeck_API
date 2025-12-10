@@ -882,11 +882,11 @@ Returned objects support:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Text` *(String, RW)*: Info/label field for display or annotation.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ID` *(String)*: Unique zone identifier.
 
-- **Methods:**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UpdateMargins(leftId, rightId, topId, bottomId)`: Change zone margin assignment.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DisposeZone()`: Remove the zone from host management (see below tip).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`GetAllFontSegments()`: List of font grid segments (tuples).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Methods:**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UpdateMargins(leftId, rightId, topId, bottomId)`: Change zone margin assignment.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DisposeZone()`: Remove the zone from host management (see below tip).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`GetAllFontSegments()`: List of font grid segments (tuples).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
 
 (Quick Notes)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.<br>
