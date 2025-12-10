@@ -911,7 +911,7 @@ Retrieve a snapshot of margin properties for a given margin ID.
 
 &nbsp;&nbsp;Returns<br>
 ```vb
-.NET Dictionary(Of String, Object)` containing margin details.
+Dictionary(Of String, Object)` containing margin details.
 ```
 If `marginId` is invalid/unknown, returns `Nothing`.
 
@@ -1304,8 +1304,7 @@ All object IDs in `structureObjectIDs(structureId)` are removed from `objectDict
 Clean up all visual objects for a structure when unloading or resetting.<br>
 Remove an entire object group before rebuilding it with new geometry. 
 
-&nbsp;&nbsp;Plugin usage pattern
-
+&nbsp;&nbsp;Plugin usage pattern<br>
 Remove all objects for a structure:<br>
 ```vb
 api.RemoveObjectsByStructureId(myStructureId)
