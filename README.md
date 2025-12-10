@@ -1111,7 +1111,7 @@ Incrementally move margins (either by row or by column) within the panel structu
 Sub MarginPlusOne(marginId As String)
 ```
 
-MarginPlusOne` moves a margin (either a row or a column margin) forward by one position in its respective direction:<br>
+MarginPlusOne moves a margin (either a row or a column margin) forward by one position in its respective direction:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;For **RowMargin**, it moves the margin to the next row.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;For **ColumnMargin**, it moves the margin to the next column.
 
