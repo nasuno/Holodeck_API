@@ -774,8 +774,8 @@ Function GetAllMarginSetNames() As List(Of String)
 A list of strings with the names of all currently defined margin sets in the host.
 
 &nbsp;&nbsp;Usage<br>
+Get all available margin set names:<br>
 ```vb
-Get all available margin set names:
     Dim marginSets = api.GetAllMarginSetNames()
     ' Example output: ["SetA", "SetB", ...]
     Console.WriteLine("Available margin sets: " & String.Join(", ", marginSets))
