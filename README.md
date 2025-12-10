@@ -944,7 +944,7 @@ Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
 **PanelType**:<br>
 `BottomPanel`, `NorthPanel`, `EastPanel`, `SouthPanel`, `WestPanel`, `TopPanel`
 
-&nbsp;&nbsp;**MarginType**:<br>
+**MarginType**:<br>
 `RowMargin`, `ColumnMargin`
 
 
