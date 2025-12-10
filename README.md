@@ -489,8 +489,8 @@ Later, you can swap or activate these sets independently for flexible layout/sta
 Sub AssignZoneMarginSetA(zoneId As String, setName As String)
 Sub AssignZoneMarginSetB(zoneId As String, setName As String)
 ```
- `zoneId` = ID of the target spatial zone.<br>
- `setName` = Name of the margin set (must already be created).
+&nbsp;&nbsp;&nbsp;&nbsp;`zoneId` = ID of the target spatial zone.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`setName` = Name of the margin set (must already be created).
 
 &nbsp;&nbsp;Usage<br>
 Create Margin Sets<br>
@@ -504,10 +504,10 @@ api.AssignZoneMarginSetB("zone1", "SetB")
  "SetA" is now in A slot; "SetB" in B slot for zone "zone1".
 
 **Activate or Swap Sets (Not covered here)**<br>
-   - Use host API to activate or swap which set is currently displayed:<br>
-     - `SwitchZoneToMarginSetA(zoneId)`<br>
-     - `SwitchZoneToMarginSetB(zoneId)`<br>
-     - `SwapZoneMarginSets(zoneId)`  ' toggle active slot
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use host API to activate or swap which set is currently displayed:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwitchZoneToMarginSetA(zoneId)`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwitchZoneToMarginSetB(zoneId)`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwapZoneMarginSets(zoneId)`  ' toggle active slot
 
 &nbsp;&nbsp;Concept<br>
 Each spatial zone has **two slots** (A + B), each holding a margin set name.<br>
@@ -547,11 +547,11 @@ A margin set consists of **two row margins (top/bottom)** and **two column margi
 api.CreateMarginSet("SetA", "SetA_TopRow", "SetA_BottomRow", "SetA_LeftColumn", "SetA_RightColumn")
 ```
 
-- `setName`: Arbitrary name for this logical grouping (e.g., "SetA").<br>
-- `topRowMarginId`: Name/id of top row margin (as created before).<br>
-- `bottomRowMarginId`: Name/id of bottom row margin.<br>
-- `leftColumnMarginId`: Name/id of left column margin.<br>
-- `rightColumnMarginId`: Name/id of right column margin.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`setName`: Arbitrary name for this logical grouping (e.g., "SetA").<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`topRowMarginId`: Name/id of top row margin (as created before).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`bottomRowMarginId`: Name/id of bottom row margin.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`leftColumnMarginId`: Name/id of left column margin.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`rightColumnMarginId`: Name/id of right column margin.
 
 Calling `CreateMarginSet` **overwrites** any set with the same name.
 
@@ -877,21 +877,21 @@ Next
 
 &nbsp;&nbsp;What is an `ISpatialZone`?<br>
 Returned objects support:<br>
-- **Properties:**<br>
-    - `Left`, `Right`, `Top`, `Bottom` *(Integer)*: Boundaries of this zone.<br>
-    - `Text` *(String, RW)*: Info/label field for display or annotation.<br>
-    - `ID` *(String)*: Unique zone identifier.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**Properties:**<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Left`, `Right`, `Top`, `Bottom` *(Integer)*: Boundaries of this zone.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Text` *(String, RW)*: Info/label field for display or annotation.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ID` *(String)*: Unique zone identifier.
 
 - **Methods:**<br>
-    - `UpdateMargins(leftId, rightId, topId, bottomId)`: Change zone margin assignment.<br>
-    - `DisposeZone()`: Remove the zone from host management (see below tip).<br>
-    - `GetAllFontSegments()`: List of font grid segments (tuples).<br>
-    - `SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UpdateMargins(leftId, rightId, topId, bottomId)`: Change zone margin assignment.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DisposeZone()`: Remove the zone from host management (see below tip).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`GetAllFontSegments()`: List of font grid segments (tuples).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SetGutterVisible(row, col, side, visible)`: Show/hide gutter for a cell-side.
 
 (Quick Notes)<br>
-- Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.<br>
-- Each returned zone exposes margins, boundaries, and customizable text.<br>
-- Disposing a zone stops host tracking-but .NET references may still affect state.WIP
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use `api.GetAllSpatialZones()` to inspect all zones currently managed by the host.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each returned zone exposes margins, boundaries, and customizable text.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Disposing a zone stops host tracking-but .NET references may still affect state.WIP
 
 
 <br><br><br><br>
@@ -1450,8 +1450,8 @@ Use this when building plugins that need to "flip" zone layouts.
 
 &nbsp;&nbsp;Concept<br>
 Each spatial zone manages two "slots" for margin sets:<br>
- MarginSetA** (often for "primary" layout)<br>
- MarginSetB** (for "alternate" layout)
+&nbsp;&nbsp;&nbsp;&nbsp;MarginSetA** (often for "primary" layout)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MarginSetB** (for "alternate" layout)
 
 Calling `SwapZoneMarginSets(zoneId)` toggles which set is currently active in the specified zone.
 
