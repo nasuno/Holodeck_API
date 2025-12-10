@@ -628,7 +628,7 @@ Dim zone As ISpatialZone = api.CreateSpatialZone("MyZone")
 zone.Text = "Hello World"
 ```
 
-Position the zone using margins ** UpdateMargins is old. Not sure if it works independent of sets MUST TEST   WIP?<br>
+Position the zone using margins ** Depreciated(internal only) Use A/B Sets.<br>
 ```vb
 zone.UpdateMargins("LeftMarginId", "RightMarginId", "TopMarginId", "BottomMarginId")
 ```
