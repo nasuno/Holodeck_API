@@ -560,7 +560,7 @@ Margins must be created first, e.g., `'SetA_TopRow'` or `'Zone3_LeftColumn'`, us
 Margin IDs are unique, descriptive strings made during margin creation.
 
 &nbsp;&nbsp;Example Pattern<br>
-' Step 1: Create margins (names must match your Set call)<br>
+Step 1: Create margins (names must match your Set call)<br>
 ```vb
 api.CreateMargin("SetB_TopRow", MarginType.RowMargin, PanelType.TopPanel, 40, Nothing, False)
 api.CreateMargin("SetB_BottomRow", MarginType.RowMargin, PanelType.TopPanel, 50, Nothing, False)
@@ -568,7 +568,7 @@ api.CreateMargin("SetB_LeftColumn", MarginType.ColumnMargin, PanelType.TopPanel,
 api.CreateMargin("SetB_RightColumn", MarginType.ColumnMargin, PanelType.TopPanel, Nothing, 35, False)
 ```
 
-' Step 2: Create the margin set<br>
+Step 2: Create the margin set<br>
 ```vb
 api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", "SetB_RightColumn")
 ```
