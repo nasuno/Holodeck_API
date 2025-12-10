@@ -755,7 +755,7 @@ End If
  `GetAllFontSegments()`  | `List(Of (Int,Int))`             | Font grid segments 
  `UpdateMargins(...)`    | `Sub`                            | Update zone margin references 
  `SetGutterVisible(...)` | `Sub`                            | Control gutter visibility 
- `DisposeZone()`         | `Sub`                            | Clean up zone resources 
+ `DisposeZone()`         | `Sub`                            | Clean up zone resources WIP 
 
 
 <br><br><br><br>
