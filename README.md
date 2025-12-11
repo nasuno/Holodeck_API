@@ -787,8 +787,7 @@ Each set is referenced by a unique string name.<br>
 Useful for toggling layouts or configurations (see "A/B margin sets" design elsewhere).
 
 &nbsp;&nbsp;**Tip:**<br>
-Margin set names are shared across spatial zones and plugin instances.<br>
-Use this API to coordinate layouts, perform swaps, or enumerate user choices.
+Margin set names are shared across spatial zones and plugin instances.
 
 
 <br><br><br><br>
