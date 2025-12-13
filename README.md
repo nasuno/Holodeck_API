@@ -550,7 +550,7 @@ api.SwapZoneMarginSets("zoneX")      ' Toggle to the other slot
 &nbsp;&nbsp;Signature<br>
 ```vb
 Sub CreateMarginSet(setName As String, topRowMarginId As String,
-                             bottomRowMarginId As String, leftColumnMarginId As String, rightColumnMarginId As String)
+                       bottomRowMarginId As String, leftColumnMarginId As String, rightColumnMarginId As String)
 ```
 
 &nbsp;&nbsp;Purpose<br>
