@@ -479,7 +479,7 @@ End Enum
 
 ===<br>
 &nbsp;&nbsp;API Methods<br>
-**`AssignZoneMarginSetA`**
+**`AssignZoneMarginSetA`**<br>
 **`AssignZoneMarginSetB`**
 
 Assign named *margin sets* to either the Primary (A) or Secondary (B) "slot" for a spatial zone.<br>
@@ -501,10 +501,10 @@ Use host API to define and name your margin sets.  **Use descriptive names that 
 
 Assign Margin Sets to Zone Slots<br>
 ```vb
-' Assign "MainLayout" to the Primary Slot (A)
-' Assign "AltLayout" to the Secondary Slot (B)
-api.AssignZoneMarginSetA("zone1", "MainLayout")
-api.AssignZoneMarginSetB("zone1", "AltLayout")
+
+
+api.AssignZoneMarginSetA("zone1", "MainLayout") ' Assign "MainLayout" to the Primary Slot (A)
+api.AssignZoneMarginSetB("zone1", "AltLayout") '  Assign "AltLayout" to the Secondary Slot (B)
 ```
 "MainLayout" is now in Primary Slot (A); "AltLayout" in Secondary Slot (B) for zone "zone1".
 
