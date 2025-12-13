@@ -9,7 +9,8 @@
 
 &nbsp;&nbsp;Signature<br>
 ```vb
-Function AddMyObjectToFactory(x As Integer, y As Integer, z As Integer, structureId As Integer) As Integer
+Function AddMyObjectToFactory(x As Integer, y As Integer, z As Integer,
+                                                  structureId As Integer) As Integer
 ```
 
 Creates a new object at the given 3D coordinates and associates it with a specified structure. <br>
