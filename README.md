@@ -967,7 +967,7 @@ Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
 
 
 ===<br>
-&&nbsp;&nbsp;API Method<br>
+&nbsp;&nbsp;API Method<br>
 **`GetMarginSet`**
 
 &nbsp;&nbsp;Signature<br>
