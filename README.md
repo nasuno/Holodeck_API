@@ -585,7 +585,8 @@ api.CreateMargin("AnotherLayout_RightColumn", MarginType. ColumnMargin, PanelTyp
 
 Step 2: Create the margin set<br>
 ```vb
-api.CreateMarginSet("AnotherLayout", "AnotherLayout_TopRow", "AnotherLayout_BottomRow", "AnotherLayout_LeftColumn", "AnotherLayout_RightColumn")
+api.CreateMarginSet("AnotherLayout", "AnotherLayout_TopRow", "AnotherLayout_BottomRow",
+                                     "AnotherLayout_LeftColumn", "AnotherLayout_RightColumn")
 ```
 
 **Overwrites**: If `setName` already exists, it is replaced.
