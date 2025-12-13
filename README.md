@@ -497,8 +497,7 @@ Sub AssignZoneMarginSetB(zoneId As String, setName As String)
 
 &nbsp;&nbsp;Usage<br>
 Create Margin Sets<br>
-Use host API to define and name your margin sets.  **Use descriptive names that make sense for your application** (e.g., "MyLayout", "LayoutOne", "CustomMargins").
-
+Use host API to define and name your margin sets.<br>
 Assign Margin Sets to Zone Slots<br>
 ```vb
 
@@ -507,8 +506,6 @@ api.AssignZoneMarginSetA("zone1", "MainLayout") ' Assign "MainLayout" to the Pri
 api.AssignZoneMarginSetB("zone1", "AltLayout") '  Assign "AltLayout" to the Secondary Slot (B)
 ```
 "MainLayout" is now in Primary Slot (A); "AltLayout" in Secondary Slot (B) for zone "zone1".
-
-**Note:** Your margin sets can have ANY name. The slot methods (`...SetA` and `...SetB`) simply determine WHICH slot you're assigning to, not what the margin set should be called.
 
 **Activate or Swap Slots (Not covered here)**<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Use host API to activate or swap which slot is currently displayed:<br>
