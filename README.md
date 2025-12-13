@@ -549,8 +549,7 @@ api.SwapZoneMarginSets("zoneX")      ' Toggle to the other slot
 
 &nbsp;&nbsp;Signature<br>
 ```vb
-Sub CreateMarginSet(setName As String, topRowMarginId As String,
-              bottomRowMarginId As String, leftColumnMarginId As String, rightColumnMarginId As String)
+Sub CreateMarginSet(setName As String, topRowMarginId As String, bottomRowMarginId As String, leftColumnMarginId As String, rightColumnMarginId As String)
 ```
 
 &nbsp;&nbsp;Purpose<br>
@@ -560,33 +559,32 @@ A margin set consists of **two row margins (top/bottom)** and **two column margi
 &nbsp;&nbsp;Usage<br>
 ```vb
 ' Create top/bottom/left/right margins first (not shown here)
-api.CreateMarginSet("SetA", "SetA_TopRow", "SetA_BottomRow", "SetA_LeftColumn", "SetA_RightColumn")
+api.CreateMarginSet("MyLayout", "MyLayout_TopRow", "MyLayout_BottomRow", "MyLayout_LeftColumn", "MyLayout_RightColumn")
 ```
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`setName`: Arbitrary name for this logical grouping (e.g., "SetA").<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`topRowMarginId`: Name/id of top row margin (as created before).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`bottomRowMarginId`: Name/id of bottom row margin.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`leftColumnMarginId`: Name/id of left column margin.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`rightColumnMarginId`: Name/id of right column margin.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`setName`: Arbitrary name for this logical grouping (e.g., "MyLayout", "CustomMargins", "LayoutOne").<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`topRowMarginId`: Name/id of top row margin (as created before).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`bottomRowMarginId`: Name/id of bottom row margin.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`leftColumnMarginId`: Name/id of left column margin.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`rightColumnMarginId`: Name/id of right column margin.
 
 Calling `CreateMarginSet` **overwrites** any set with the same name.
 
 &nbsp;&nbsp;Margin IDs<br>
-Margins must be created first, e.g., `'SetA_TopRow'` or `'Zone3_LeftColumn'`, using `api.CreateMargin`.<br>
-Margin IDs are unique, descriptive strings made during margin creation.
+Margins must be created first, e.g., `'MyLayout_TopRow'` or `'Zone3_LeftColumn'`, using `api.CreateMargin`.<br>
+Margin IDs are unique, descriptive strings made during margin creation. 
 
 &nbsp;&nbsp;Example Pattern<br>
 Step 1: Create margins (names must match your Set call)<br>
 ```vb
-api.CreateMargin("SetB_TopRow", MarginType.RowMargin, PanelType.TopPanel, 40, Nothing, False)
-api.CreateMargin("SetB_BottomRow", MarginType.RowMargin, PanelType.TopPanel, 50, Nothing, False)
-api.CreateMargin("SetB_LeftColumn", MarginType.ColumnMargin, PanelType.TopPanel, Nothing, 22, False)
-api.CreateMargin("SetB_RightColumn", MarginType.ColumnMargin, PanelType.TopPanel, Nothing, 35, False)
+api.CreateMargin("AnotherLayout_TopRow", MarginType. RowMargin, PanelType.TopPanel, 40, Nothing, False)
+api.CreateMargin("AnotherLayout_BottomRow", MarginType. RowMargin, PanelType.TopPanel, 50, Nothing, False)
+api.CreateMargin("AnotherLayout_LeftColumn", MarginType. ColumnMargin, PanelType.TopPanel, Nothing, 22, False)
+api.CreateMargin("AnotherLayout_RightColumn", MarginType. ColumnMargin, PanelType.TopPanel, Nothing, 35, False)
 ```
 
 Step 2: Create the margin set<br>
 ```vb
-api.CreateMarginSet("SetB", "SetB_TopRow", "SetB_BottomRow", "SetB_LeftColumn", "SetB_RightColumn")
+api.CreateMarginSet("AnotherLayout", "AnotherLayout_TopRow", "AnotherLayout_BottomRow", "AnotherLayout_LeftColumn", "AnotherLayout_RightColumn")
 ```
 
 **Overwrites**: If `setName` already exists, it is replaced.
