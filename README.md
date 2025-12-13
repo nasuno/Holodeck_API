@@ -477,51 +477,65 @@ End Enum
 
 
 ===<br>
-&nbsp;&nbsp;API Methods<br>
-**`AssignZoneMarginSetA`**<br>
+  API Methods
+**`AssignZoneMarginSetA`**
 **`AssignZoneMarginSetB`**
 
-Assign named *margin sets* to either the A or B "slot" for a spatial zone. <br>
-Later, you can swap or activate these sets independently for flexible layout/state control.
+Assign named *margin sets* to either the Primary (A) or Secondary (B) "slot" for a spatial zone. 
+Later, you can swap or activate these slots independently for flexible layout/state control.
 
-&nbsp;&nbsp;Signatures<br>
+**IMPORTANT:** The "A" and "B" in these method names refer to *slots*, not to how you should name your margin sets! You can assign margin sets with *any name* to either slot. 
+
+  Signatures
 ```vb
 Sub AssignZoneMarginSetA(zoneId As String, setName As String)
 Sub AssignZoneMarginSetB(zoneId As String, setName As String)
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;`zoneId` = ID of the target spatial zone.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;`setName` = Name of the margin set (must already be created).
+    `zoneId` = ID of the target spatial zone. 
+    `setName` = Name of *any* margin set you've created (can be any valid name).
 
-&nbsp;&nbsp;Usage<br>
-Create Margin Sets<br>
-Use host API to define and name your margin sets.
+  Usage
+Create Margin Sets
+Use host API to define and name your margin sets.  **Use descriptive names that make sense for your application** (e.g., "MyLayout", "LayoutOne", "CustomMargins").
 
-Assign Margin Sets to Zone Slots<br>
+Assign Margin Sets to Zone Slots
 ```vb
-api.AssignZoneMarginSetA("zone1", "SetA")
-api.AssignZoneMarginSetB("zone1", "SetB")
+' Assign "MainLayout" to the Primary Slot (A)
+' Assign "AltLayout" to the Secondary Slot (B)
+api.AssignZoneMarginSetA("zone1", "MainLayout")
+api.AssignZoneMarginSetB("zone1", "AltLayout")
 ```
- "SetA" is now in A slot; "SetB" in B slot for zone "zone1".
+"MainLayout" is now in Primary Slot (A); "AltLayout" in Secondary Slot (B) for zone "zone1".
 
-**Activate or Swap Sets (Not covered here)**<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use host API to activate or swap which set is currently displayed:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwitchZoneToMarginSetA(zoneId)`<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwitchZoneToMarginSetB(zoneId)`<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`SwapZoneMarginSets(zoneId)`  ' toggle active slot
+**Activate or Swap Slots (Not covered here)**
+        Use host API to activate or swap which slot is currently displayed:
+          `SwitchZoneToMarginSetA(zoneId)`  ' Activate the Primary Slot
+          `SwitchZoneToMarginSetB(zoneId)`  ' Activate the Secondary Slot
+          `SwapZoneMarginSets(zoneId)`  ' toggle between Primary and Secondary
 
-&nbsp;&nbsp;Concept<br>
-Each spatial zone has **two slots** (A + B), each holding a margin set name.<br>
-You can *assign*, *activate*, or *swap* which slot is currently in use.<br>
+  Concept
+Each spatial zone has **two slots** (Primary and Secondary), each holding a margin set name.
+You can *assign*, *activate*, or *swap* which slot is currently in use.
 "Swapping" only toggles which slot is active-it does NOT change the slot contents.
 
-&nbsp;&nbsp;Margin sets <br>
-Must be created first and their names must be valid.<br>
+  Margin sets
+Must be created first.
 Slots are just pointers to margin set names-swapping doesn't modify the sets.
 
-&nbsp;&nbsp;Quick Sample<br>
+  Quick Sample
 ```vb
-api.AssignZoneMarginSetA("zoneX", "MainLayout")
-api.AssignZoneMarginSetB("zoneX", "AltLayout")
+' Create your margin sets with descriptive names
+api.CreateMarginSet("MyFirstLayout", ...)
+api.CreateMarginSet("MySecondLayout", ...)
+
+' Assign them to the zone's two slots
+api.AssignZoneMarginSetA("zoneX", "MyFirstLayout")   ' Primary Slot
+api.AssignZoneMarginSetB("zoneX", "MySecondLayout")  ' Secondary Slot
+
+' Switch between them as needed
+api.SwitchZoneToMarginSetA("zoneX")  ' Show MyFirstLayout
+api.SwitchZoneToMarginSetB("zoneX")  ' Show MySecondLayout
+api.SwapZoneMarginSets("zoneX")      ' Toggle to the other slot
 ```
 
 
