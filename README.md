@@ -967,7 +967,7 @@ Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
 
 
 ===<br>
-&nbsp;&nbsp;API Method<br>
+&&nbsp;&nbsp;API Method<br>
 **`GetMarginSet`**
 
 &nbsp;&nbsp;Signature<br>
@@ -980,17 +980,16 @@ Retrieve the contents of a named margin set.
 
 &nbsp;&nbsp;Usage<br>
 Input<br>
-`setName`: Name of the margin set (as specified during setup).
+`setName`: Name of the margin set (as specified during setup). This can be any name you chose when creating the set.
 
 &nbsp;&nbsp;Returns<br>
-`Dictionary(Of String, String)` containing margin assignments:
-
- Always includes keys: `"TopRow"`, `"BottomRow"`, `"LeftColumn"`, `"RightColumn"`<br>
- Each value is the margin ID used by the set.
+`Dictionary(Of String, String)` containing margin assignments:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Always includes keys:  `"TopRow"`, `"BottomRow"`, `"LeftColumn"`, `"RightColumn"`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Each value is the margin ID used by the set. 
 
 &nbsp;&nbsp;Example<br>
 ```vb
-    Dim marginSet = api.GetMarginSet("SetA")
+    Dim marginSet = api. GetMarginSet("MyLayout")
     ' marginSet("TopRow")       => the margin ID for the top row
     ' marginSet("BottomRow")    => the margin ID for the bottom row
     ' marginSet("LeftColumn")   => the margin ID for the left column
