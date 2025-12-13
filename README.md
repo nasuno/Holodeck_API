@@ -989,7 +989,7 @@ Input<br>
 
 &nbsp;&nbsp;Example<br>
 ```vb
-    Dim marginSet = api. GetMarginSet("MyLayout")
+    Dim marginSet = api.GetMarginSet("MyLayout")
     ' marginSet("TopRow")       => the margin ID for the top row
     ' marginSet("BottomRow")    => the margin ID for the bottom row
     ' marginSet("LeftColumn")   => the margin ID for the left column
