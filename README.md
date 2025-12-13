@@ -560,7 +560,8 @@ A margin set consists of **two row margins (top/bottom)** and **two column margi
 &nbsp;&nbsp;Usage<br>
 ```vb
 ' Create top/bottom/left/right margins first (not shown here)
-api.CreateMarginSet("MyLayout", "MyLayout_TopRow", "MyLayout_BottomRow", "MyLayout_LeftColumn", "MyLayout_RightColumn")
+api.CreateMarginSet("MyLayout", "MyLayout_TopRow", "MyLayout_BottomRow",
+                                "MyLayout_LeftColumn", "MyLayout_RightColumn")
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`setName`: Arbitrary name for this logical grouping (e.g., "MyLayout", "CustomMargins", "LayoutOne").<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`topRowMarginId`: Name/id of top row margin (as created before).<br>
