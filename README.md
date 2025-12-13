@@ -1019,7 +1019,9 @@ Returns the name of the _currently active margin set_ assigned to the specified 
 `zoneId` (String): The ID of the spatial zone you wish to query.
 
 &nbsp;&nbsp;Returns<br>
-(String): Name of the active margin set (`"SetA"`, `"SetB"`, etc.), or `Nothing` if the zone is not found or no set is assigned.
+(String): Name of the active margin set (e.g., `"MainLayout"`, `"MyCustomSet"`, etc.), or `Nothing` if the zone is not found or no set is assigned.
+
+**Note:** This returns whatever name *you* gave your margin set when you created it.  The return value is not related to the slot names (A/B)
 
 &nbsp;&nbsp;Usage<br>
 ```vb
