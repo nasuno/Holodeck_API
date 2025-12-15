@@ -209,12 +209,12 @@ Private bottomRight As (Double, Double, Double)
 Public Sub UpdateTriangles()
     ' Clear existing triangles if set already exists
     If triangleSetId > 0 Then
-        RemoveAllTrianglesInSet(triangleSetId)
+        api.RemoveAllTrianglesInSet(triangleSetId)
     End If
 
     ' Initialize setId if not yet assigned
     If triangleSetId = 0 Then
-        triangleSetId = GetNextUniqId()
+        triangleSetId = api.GetNextUniqId() 
     End If
 
     ' Alias corners for readability
@@ -224,14 +224,14 @@ Public Sub UpdateTriangles()
     Dim d = bottomLeft
 
     ' First triangle (top-left, top-right, bottom-right)
-    AddTriangle(
+    api.AddTriangle(
         a.Item1, a.Item2, a.Item3,
         b.Item1, b.Item2, b.Item3,
         c.Item1, c.Item2, c.Item3,
         triangleSetId)
 
     ' Second triangle (top-left, bottom-right, bottom-left)
-    AddTriangle(
+    api.AddTriangle(
         a.Item1, a.Item2, a.Item3,
         c.Item1, c.Item2, c.Item3,
         d.Item1, d.Item2, d.Item3,
