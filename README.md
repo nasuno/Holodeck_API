@@ -180,7 +180,7 @@ Function AddTriangle(
 ```
 
 &nbsp;&nbsp;Purpose<br>
-Registers a triangle for ray-occlusion / collision testing.<br>
+Registers a triangle for ray-occlusion testing.<br>
 Groups the triangle under `setId` for batch management.
 
 &nbsp;&nbsp;Parameters<br>
@@ -195,7 +195,7 @@ Groups the triangle under `setId` for batch management.
 `Integer`: Unique `triangleId` assigned to the new triangle. 
 
 &nbsp;&nbsp;Plugin use cases<br>
-Define collision/occlusion surfaces for your objects.<br>
+Define occlusion surfaces for your objects.<br>
 Update geometry each frame for moving/rotating objects.
 
 &nbsp;&nbsp;Plugin usage<br>
