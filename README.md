@@ -198,28 +198,45 @@ Groups the triangle under `setId` for batch management.
 Define collision/occlusion surfaces for your objects.<br>
 Update geometry each frame for moving/rotating objects.
 
-&nbsp;&nbsp;Plugin usage pattern<br>
-Add a single triangle:<br>
+&nbsp;&nbsp;Plugin usage<br>
 ```vb
-Dim triId As Integer = api.AddTriangle(
-    ax, ay, az,
-    bx, by, bz,
-    cx, cy, cz,
-    mySetId)
-```
+Private triangleSetId As Integer = 0
+Private topLeft As (Double, Double, Double)
+Private topRight As (Double, Double, Double)
+Private bottomLeft As (Double, Double, Double)
+Private bottomRight As (Double, Double, Double)
 
-Add two triangles for a quad face:<br>
-```vb
-api.AddTriangle(v0. X, v0.Y, v0.Z, v1.X, v1.Y, v1.Z, v2.X, v2.Y, v2. Z, mySetId)
-api.AddTriangle(v0. X, v0.Y, v0.Z, v2.X, v2.Y, v2.Z, v3. X, v3.Y, v3.Z, mySetId)
-```
+Public Sub UpdateTriangles()
+    ' Clear existing triangles if set already exists
+    If triangleSetId > 0 Then
+        RemoveAllTrianglesInSet(triangleSetId)
+    End If
 
-Per-frame update (clear then rebuild):<br>
-```vb
-api.RemoveAllTrianglesInSet(mySetId)
-' Add triangles for current frame positions
-api.AddTriangle(...)
-api.AddTriangle(...)
+    ' Initialize setId if not yet assigned
+    If triangleSetId = 0 Then
+        triangleSetId = GetNextUniqId()
+    End If
+
+    ' Alias corners for readability
+    Dim a = topLeft
+    Dim b = topRight
+    Dim c = bottomRight
+    Dim d = bottomLeft
+
+    ' First triangle (top-left, top-right, bottom-right)
+    AddTriangle(
+        a.Item1, a.Item2, a.Item3,
+        b.Item1, b.Item2, b.Item3,
+        c.Item1, c.Item2, c.Item3,
+        triangleSetId)
+
+    ' Second triangle (top-left, bottom-right, bottom-left)
+    AddTriangle(
+        a.Item1, a.Item2, a.Item3,
+        c.Item1, c.Item2, c.Item3,
+        d.Item1, d.Item2, d.Item3,
+        triangleSetId)
+End Sub
 ```
 
 &nbsp;&nbsp;Notes<br>
