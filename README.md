@@ -48,7 +48,84 @@ Next
 You don't need to track them if you are tracking the structureId. <br>
 The return is optional.<br>
 The returned integer uniquely identifies the object and can be used for future reference.<br>
-The default object color and additional properties are not settable through this API call; only position and structure.
+The default object color and additional properties are not settable through this API call; only position and structure.<br>
+(see MyObject Color Property)
+
+
+<br><br><br><br>
+
+
+===<br>
+&nbsp;&nbsp;MyObject Color Property
+
+Objects created via `AddMyObjectToFactory` can have their color overridden by setting the `ColorOverride` property on the `MyObject` instance.<br>
+```vb
+obj.ColorOverride As ObjectColor?    ' Nullable - set to Nothing for default color
+```
+
+---
+
+&nbsp;&nbsp;Setting Color on a Single Object<br>
+```vb
+' Create object, get ID
+Dim objId As Integer = api.AddMyObjectToFactory(x, y, z, structureId)
+
+' Retrieve object from dictionary
+Dim obj As MyObject = Nothing
+If api.objectDictionary. TryGetValue(objId, obj) Then
+    obj.ColorOverride = ObjectColor. Red
+End If
+```
+
+---
+
+&nbsp;&nbsp;Batch Coloring via Structure<br>
+```vb
+Dim structureObjIds = DirectCast(api.structureObjectIDs, ConcurrentDictionary(Of Integer, ImmutableList(Of Integer)))
+Dim objIdsList As ImmutableList(Of Integer) = Nothing
+
+If structureObjIds.TryGetValue(myStructureId, objIdsList) Then
+    For i As Integer = 0 To objIdsList.Count - 1
+        Dim obj As MyObject = Nothing
+        If api.objectDictionary.TryGetValue(objIdsList(i), obj) Then
+            obj.ColorOverride = ObjectColor.Yellow
+        End If
+    Next
+End If
+```
+
+---
+
+&nbsp;&nbsp;Clearing Color Override<br>
+```vb
+obj.ColorOverride = Nothing   ' Returns to default rendering color
+```
+
+---
+
+&nbsp;&nbsp;ObjectColor Enum
+
+```vb
+Public Enum ObjectColor
+    Black = 1
+    White = 2
+    WhiteDim = 3
+    GreyLight = 4
+    Grey = 5
+    Brown = 6
+    Red = 7
+    Orange = 8
+    Yellow = 9
+    Lime = 10
+    Green = 11
+    Cyan = 12
+    BlueLight = 13
+    Blue = 14
+    Purple = 15
+    Magenta = 16
+    Pink = 17
+End Enum
+```
 
 
 <br><br><br><br>
