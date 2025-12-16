@@ -57,6 +57,9 @@ The default object color and additional properties are not settable through this
 
 ===<br>
 &nbsp;&nbsp;MyObject Color Property<br>
+**`obj.ColorOverride`**
+
+&nbsp;&nbsp;Purpose<br>
 Objects created via `AddMyObjectToFactory` can have their color overridden by setting the `ColorOverride` property on the `MyObject` instance.<br>
 ```vb
 obj.ColorOverride As ObjectColor?    ' Nullable - set to Nothing for default color
