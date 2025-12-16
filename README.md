@@ -108,7 +108,7 @@ obj.ColorOverride = Nothing   ' Returns to default rendering color
 &nbsp;&nbsp;ObjectColor Enum
 
 ```vb
-Public Enum ObjectColor
+API Public Enum ObjectColor
     Black = 1
     White = 2
     WhiteDim = 3
