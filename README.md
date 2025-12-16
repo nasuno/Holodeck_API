@@ -1267,9 +1267,103 @@ Sub MarginJump(
     newRow As Integer?,
     newCol As Integer?
 )
+
+---
+
+&nbsp;&nbsp;Parameters
+
+  Name      |  Type       | Description
+------------|-------------|-------------
+ `marginId` | `String`    | ID of the margin to move
+ `newPanel` | `PanelType` | Target panel
+ `newRow`   | `Integer? ` | Target row index (for `RowMargin` only)
+ `newCol`   | `Integer?`  | Target column index (for `ColumnMargin` only)
+
+---
+
+&nbsp;&nbsp;Usage Rules
+
+**For row margins (`MarginType. RowMargin`):**<br>
+`newRow`: Must be the target row index<br>
+`newCol`: Must be `Nothing`
+
+**For column margins (`MarginType.ColumnMargin`):**<br>
+`newCol`: Must be the target column index<br>
+`newRow`: Must be `Nothing`
+
+The margin **must not** be locked; locked margins cannot be moved<br>
+
+---
+
+&nbsp;&nbsp;Panel Bounds
+
+Before jumping a margin, query the target panel's valid row/column range: (optional)<br>
+```vb
+Dim leftCol   As Integer = api.GetPanelFurthestLeftColumn(PanelType.TopPanel)
+Dim topRow    As Integer = api.GetPanelFurthestTopRow(PanelType.TopPanel)
+Dim rightCol  As Integer = api.GetPanelFurthestRightColumn(PanelType.TopPanel)
+Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType. TopPanel)
 ```
 
-&nbsp;&nbsp;API Enum: PanelType<br>
+  Method                              | Returns
+--------------------------------------|---------
+ `GetPanelFurthestLeftColumn(panel)`  | Minimum column index
+ `GetPanelFurthestTopRow(panel)`      | Minimum row index
+ `GetPanelFurthestRightColumn(panel)` | Maximum column index
+ `GetPanelFurthestBottomRow(panel)`   | Maximum row index
+
+**Valid row index range:** `topRow` to `bottomRow`<br>
+**Valid column index range:** `leftCol` to `rightCol`
+
+---
+
+&nbsp;&nbsp;Examples
+
+**Move a row margin:**<br>
+```vb
+' Get valid row range for target panel (optional)
+Dim topRow As Integer = api.GetPanelFurthestTopRow(PanelType.EastPanel)
+Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType.EastPanel)
+
+' Move row margin to row 3 in EastPanel (ensure 3 is within topRow.. bottomRow)
+api.MarginJump(
+    marginId:="margin_row_1",
+    newPanel:=PanelType.EastPanel,
+    newRow:=3,
+    newCol:=Nothing
+)
+```
+
+**Move a column margin:**<br>
+```vb
+' Get valid column range for target panel
+Dim leftCol As Integer = api.GetPanelFurthestLeftColumn(PanelType.SouthPanel)
+Dim rightCol As Integer = api. GetPanelFurthestRightColumn(PanelType.SouthPanel)
+
+' Move column margin to column 2 in SouthPanel (ensure 2 is within leftCol..rightCol)
+api.MarginJump(
+    marginId:="margin_col_99",
+    newPanel:=PanelType.SouthPanel,
+    newRow: =Nothing,
+    newCol: =2
+)
+```
+
+**Jump to panel edge:**<br>
+```vb
+' Move a row margin to the bottom edge of TopPanel
+Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType.TopPanel)
+api.MarginJump("my_row_margin", PanelType.TopPanel, bottomRow, Nothing)
+
+' Move a column margin to the right edge of TopPanel
+Dim rightCol As Integer = api.GetPanelFurthestRightColumn(PanelType.TopPanel)
+api.MarginJump("my_col_margin", PanelType.TopPanel, Nothing, rightCol)
+```
+
+---
+
+&nbsp;&nbsp;API PanelType Enum
+
 ```vb
 Public Enum PanelType
     BottomPanel
@@ -1279,40 +1373,6 @@ Public Enum PanelType
     WestPanel
     TopPanel
 End Enum
-```
-
-&nbsp;&nbsp;Usage<br>
-For row margins (`Margin.Type = RowMargin`):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;newRow : Must be the target row index.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;newCol : Must be `Nothing`.<br>
-For column margins (`Margin.Type = ColumnMargin`):<br>
-&nbsp;&nbsp;&nbsp;&nbsp;newCol : Must be the target column index.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;newRow : Must be `Nothing`.<br>
-The margin **must not** be locked; locked margins cannot be moved.
-
-If you supply both `newRow` and `newCol`, or neither, an exception will be thrown.  
-
-&nbsp;&nbsp;Example<br>
-Move a Row Margin:<br>
-```vb
-' Move row margin "margin_row_1" to row 3 in the EastPanel
-MarginJump(
-    marginId:="margin_row_1",
-    newPanel:=PanelType.EastPanel,
-    newRow:=3,
-    newCol:=Nothing
-)
-```
-
-Move a Column Margin:<br>
-```vb
-' Move column margin "margin_col_99" to column 2 in the SouthPanel
-MarginJump(
-    marginId:="margin_col_99",
-    newPanel:=PanelType.SouthPanel,
-    newRow:=Nothing,
-    newCol:=2
-)
 ```
 
 
