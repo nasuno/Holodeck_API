@@ -781,6 +781,7 @@ Next
 ```
 
 Toggle gutter visibility<br>
+Side must be `"above"`, `"below"`, `"left"`, or `"right"`.<br>
 ```vb
 zone.SetGutterVisible(0, 1, "above", True)   ' Show gutter above cell (0,1)
 zone.SetGutterVisible(0, 1, "above", False)  ' Hide it
