@@ -1878,7 +1878,8 @@ If mi IsNot Nothing Then mi.Invoke(provider, New Object() {})
 
 &nbsp;&nbsp;Helper for simple call style
 
-To make usage as easy as the example you showed (`CallPluginB("CreateZone", ...)`), add a helper function to the consumer plugin. This caches the provider reference and exposes a simple call pattern.
+A helper function to the consumer plugin. This caches the provider reference and exposes a simple call pattern.<br>
+(Add it to your plugins)
 
 ```vb
 ' Field to hold the provider instance
@@ -1923,11 +1924,8 @@ CallPluginB("ReportAll")
 
 &nbsp;&nbsp;Notes
 
-**Intent**: Use PluginLocator to publish plugin instances so other plugins can run their methods.  
-**Key names**: Use clear, unique keys (include plugin name).  
-**Overwrite**: Register replaces any existing entry for the same key.  
-**Threading**: The backing `Dictionary` is not synchronized for concurrent writes; use `SyncLock` or a thread-safe store if needed.  
-**Errors**: When using reflection, always check method names and parameters.
+**Overwrite**: Register replaces any existing entry for the same key.<br>
+**Threading**: The backing `Dictionary` is not synchronized for concurrent writes; use `SyncLock` or a thread-safe store if needed.
 
 ---
 
