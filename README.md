@@ -1801,6 +1801,135 @@ End If
 
 ---
 
+
+&nbsp;&nbsp;PluginLocator
+
+**Purpose**<br>
+A global registry that lets one plugin publish its plugin instance under a string key so other plugins can retrieve that plugin instance and **run its methods**. This is the mechanism that makes inter-plugin calls possible: a provider plugin registers itself, and a consumer plugin looks it up and invokes its methods.
+
+---
+
+&nbsp;&nbsp;API Methods
+
+**`PluginLocator.Register`**<br>
+```vb
+Public Shared Sub Register(key As String, instance As Object)
+```
+Registers a plugin instance under a unique string key. If the key already exists the instance is replaced.
+
+**Parameters**
+
+  Name | Type | Description
+  ---- | ---- | -----------
+  **key** | String | Unique key used to publish the plugin instance
+  **instance** | Object | The plugin instance to publish (commonly `Me`)
+
+**Returns**<br>
+None
+
+---
+
+**`PluginLocator.Get`**<br>
+```vb
+Public Shared Function [Get](Of T As Class)(key As String) As T
+```
+Retrieves the plugin instance registered under `key` and returns it as `T`. Returns `Nothing` if the key is not found or the stored instance cannot be returned as `T`.
+
+**Parameters**
+
+  Name | Type | Description
+  ---- | ---- | -----------
+  **key** | String | The registration key to look up
+
+**Returns**<br>
+`T` - The registered plugin instance, or `Nothing` if not found.
+
+---
+
+&nbsp;&nbsp;Example
+
+Provider registers itself:<br>
+```vb
+Public Sub Execute(api As ICurrentApi) Implements IPlugin.Execute
+    ' Publish this plugin instance so other plugins can call its methods
+    PluginLocator.Register("Interop Demo PluginA", Me)
+End Sub
+```
+
+Consumer retrieves and calls methods:<br>
+```vb
+Dim provider As Object = PluginLocator.Get(Of Object)("Interop Demo PluginA")
+If provider Is Nothing Then
+    Console.WriteLine("Provider plugin not found.")
+    Return
+End If
+
+Dim mi = provider.GetType().GetMethod("SayHello")
+If mi IsNot Nothing Then mi.Invoke(provider, New Object() {})
+```
+
+---
+
+&nbsp;&nbsp;Helper for simple call style
+
+To make usage as easy as the example you showed (`CallPluginB("CreateZone", ...)`), add a helper function to the consumer plugin. This caches the provider reference and exposes a simple call pattern.
+
+```vb
+' Field to hold the provider instance
+Private pluginB As Object = Nothing
+
+' Acquire provider once (for example in Execute)
+Private Sub AcquirePluginB()
+    If pluginB Is Nothing Then
+        pluginB = PluginLocator.Get(Of Object)("Interop Demo PluginB")
+    End If
+End Sub
+
+' ---- Helper for invoking PluginB methods ----
+Private Function CallPluginB(methodName As String, ParamArray args() As Object) As Object
+    If pluginB Is Nothing Then
+        Console.WriteLine("PluginB reference is missing.")
+        Return Nothing
+    End If
+
+    Dim mi = pluginB.GetType().GetMethod(methodName)
+    If mi IsNot Nothing Then
+        Return mi.Invoke(pluginB, args)
+    Else
+        Console.WriteLine("Method '" & methodName & "' not found on PluginB.")
+        Return Nothing
+    End If
+End Function
+```
+
+&nbsp;&nbsp;Usage<br>
+```vb
+AcquirePluginB()
+
+CallPluginB("CreateCollectionWithTuples", "test_collectionA", "Host Zone Text", originTuple, charWidthsTuple)
+CallPluginB("CreateZone", "test_collectionA", "zone1")
+CallPluginB("UpdateZoneText", "test_collectionA", "test_collectionA", "File")
+CallPluginB("UpdateZoneText", "test_collectionA", "zone1", "Abra")
+CallPluginB("ReportAll")
+```
+
+---
+
+&nbsp;&nbsp;Notes
+
+**Intent**: Use PluginLocator to publish plugin instances so other plugins can run their methods.  
+**Key names**: Use clear, unique keys (include plugin name).  
+**Overwrite**: Register replaces any existing entry for the same key.  
+**Threading**: The backing `Dictionary` is not synchronized for concurrent writes; use `SyncLock` or a thread-safe store if needed.  
+**Errors**: When using reflection, always check method names and parameters.
+
+---
+
+**Summary**<br>
+Register your provider plugin instance with a clear key. Consumers call `PluginLocator.Get` to obtain that instance and then run its methods. With the `CallPluginB` helper, you get the exact, simple call style demonstrated in your example.
+
+---
+
 https://github.com/nasuno/Holodeck<br>
 https://github.com/nasuno/Plugin-Satellite-Cubes<br>
 https://github.com/nasuno/Plugin-SpatialZone-Demo<br>
