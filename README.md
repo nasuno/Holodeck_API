@@ -176,10 +176,10 @@ Place objects along a line segment between two vertices.
 &nbsp;&nbsp;Plugin access pattern<br>
 Draw a line:<br>
 ```vb
-Dim pts = api. Bresenham3D(startX, startY, startZ, endX, endY, endZ)
+Dim pts = api.Bresenham3D(startX, startY, startZ, endX, endY, endZ)
 
 For Each pt In pts
-    api.AddMyObjectToFactory(pt.Item1, pt. Item2, pt.Item3, myStructureId)
+    api.AddMyObjectToFactory(pt.Item1, pt.Item2, pt.Item3, myStructureId)
 Next
 ```
 
@@ -833,7 +833,7 @@ Build a zone pool for reuse across plugin logic.
 &nbsp;&nbsp;Plugin access patterns<br>
 Retrieve a zone:<br>
 ```vb
-Dim zone As ISpatialZone = api. GetSpatialZone("myZoneId")
+Dim zone As ISpatialZone = api.GetSpatialZone("myZoneId")
 If zone IsNot Nothing Then
     ' Zone exists, use it
 End If
@@ -845,7 +845,7 @@ Dim zone As ISpatialZone = api.GetSpatialZone("myZoneId")
 If zone IsNot Nothing Then
     Dim left As Integer = zone.Left
     Dim right As Integer = zone.Right
-    Dim top As Integer = zone. Top
+    Dim top As Integer = zone.Top
     Dim bottom As Integer = zone.Bottom
     Dim id As String = zone.ID
     Dim aabb = zone.BoundingBoxAABB   ' ((minX, minY, minZ), (maxX, maxY, maxZ))
@@ -955,7 +955,7 @@ End If
 
 Iterate all row margin IDs:<br>
 ```vb
-Dim allMargins = api. GetAllMarginIDs()
+Dim allMargins = api.GetAllMarginIDs()
 For Each marginId As String In allMargins("row")
     ' Use marginId with other margin API calls
 Next
@@ -1550,7 +1550,7 @@ api.SetStructureDrawState(myStructureId, True)
 
 Disable drawing for a structure:<br>
 ```vb
-api. SetStructureDrawState(myStructureId, False)
+api.SetStructureDrawState(myStructureId, False)
 ```
 
 &nbsp;&nbsp;Notes<br>
