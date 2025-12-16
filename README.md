@@ -1346,7 +1346,7 @@ api.MarginJump(
 ```vb
 ' Get valid column range for target panel
 Dim leftCol As Integer = api.GetPanelFurthestLeftColumn(PanelType.SouthPanel)
-Dim rightCol As Integer = api. GetPanelFurthestRightColumn(PanelType.SouthPanel)
+Dim rightCol As Integer = api.GetPanelFurthestRightColumn(PanelType.SouthPanel)
 
 ' Move column margin to column 2 in SouthPanel (ensure 2 is within leftCol..rightCol)
 api.MarginJump(
