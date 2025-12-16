@@ -1,6 +1,6 @@
 <br><br>
 
-![](https://gifyu.com/image/bE4Pr)
+![](https://gifyu.com/image/bE4Pr.gif)
 
 <br><br>
 
