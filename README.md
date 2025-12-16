@@ -1045,11 +1045,11 @@ but `Row`/`Column` may be `Nothing` depending on margin type):<br>
 Dim marginInfo = api.GetMarginInfoSnapshot("RightColumn")
 
 ' Sample property access:
-Dim isLocked As Boolean = CBool(marginInfo("Locked"))
-Dim marginType As MarginType = CType(marginInfo("Type"), MarginType)
-Dim panel As PanelType = CType(marginInfo("Panel"), PanelType)
-Dim maybeRow As Integer? = CType(marginInfo("Row"), Integer?)
-Dim maybeCol As Integer? = CType(marginInfo("Column"), Integer?)
+Dim isLocked As Boolean = marginInfo("Locked")
+Dim marginType As MarginType = marginInfo("Type")
+Dim panel As PanelType = marginInfo("Panel")
+Dim maybeRow As Integer? = marginInfo("Row")
+Dim maybeCol As Integer? = marginInfo("Column")
 ```
 
 &nbsp;&nbsp;API Enums<br>
