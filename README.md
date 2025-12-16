@@ -75,7 +75,7 @@ Dim objId As Integer = api.AddMyObjectToFactory(x, y, z, structureId)
 ' Retrieve object from dictionary
 Dim obj As MyObject = Nothing
 If api.objectDictionary. TryGetValue(objId, obj) Then
-    obj.ColorOverride = ObjectColor. Red
+    obj.ColorOverride = ObjectColor.Red
 End If
 ```
 
