@@ -285,43 +285,27 @@ Update geometry each frame for moving/rotating objects.
 
 &nbsp;&nbsp;Plugin usage<br>
 ```vb
-Private triangleSetId As Integer = 0
-Private topLeft As (Double, Double, Double)
-Private topRight As (Double, Double, Double)
-Private bottomLeft As (Double, Double, Double)
-Private bottomRight As (Double, Double, Double)
+' Four corner points of the rectangle.
+Dim topLeft As (Double, Double, Double) = (0, 1, 0)
+Dim topRight As (Double, Double, Double) = (1, 1, 0)
+Dim bottomLeft As (Double, Double, Double) = (0, 0, 0)
+Dim bottomRight As (Double, Double, Double) = (1, 0, 0)
 
-Public Sub UpdateTriangles()
-    ' Clear existing triangles if set already exists
-    If triangleSetId > 0 Then
-        api.RemoveAllTrianglesInSet(triangleSetId)
-    End If
+Dim setId As Integer = 1
 
-    ' Initialize setId if not yet assigned
-    If triangleSetId = 0 Then
-        triangleSetId = api.GetNextUniqId() 
-    End If
+' Add the first triangle: topLeft → topRight → bottomRight
+Dim triId1 As Integer = api.AddTriangle(
+    topLeft.Item1, topLeft.Item2, topLeft.Item3,
+    topRight.Item1, topRight.Item2, topRight.Item3,
+    bottomRight.Item1, bottomRight.Item2, bottomRight.Item3,
+    setId)
 
-    ' Alias corners for readability
-    Dim a = topLeft
-    Dim b = topRight
-    Dim c = bottomRight
-    Dim d = bottomLeft
-
-    ' First triangle (top-left, top-right, bottom-right)
-    api.AddTriangle(
-        a.Item1, a.Item2, a.Item3,
-        b.Item1, b.Item2, b.Item3,
-        c.Item1, c.Item2, c.Item3,
-        triangleSetId)
-
-    ' Second triangle (top-left, bottom-right, bottom-left)
-    api.AddTriangle(
-        a.Item1, a.Item2, a.Item3,
-        c.Item1, c.Item2, c.Item3,
-        d.Item1, d.Item2, d.Item3,
-        triangleSetId)
-End Sub
+' Add the second triangle: topLeft → bottomRight → bottomLeft
+Dim triId2 As Integer = api.AddTriangle(
+    topLeft.Item1, topLeft.Item2, topLeft.Item3,
+    bottomRight.Item1, bottomRight.Item2, bottomRight.Item3,
+    bottomLeft.Item1, bottomLeft.Item2, bottomLeft.Item3,
+    setId)
 ```
 
 &nbsp;&nbsp;Notes<br>
