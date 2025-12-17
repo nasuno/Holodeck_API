@@ -1210,8 +1210,7 @@ Once created with `locked:=True`, the margin cannot be edited by users until unl
 
 ===<br>
 &nbsp;&nbsp;API Method<br>
-**`MarginPlusOne`**
-
+**`MarginPlusOne`** `MarginMinusOne`
 Incrementally move margins (either by row or by column) within the panel structure.
 
 &nbsp;&nbsp;Signature<br>
