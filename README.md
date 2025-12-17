@@ -1929,11 +1929,6 @@ CallPluginB("ReportAll")
 
 ---
 
-**Summary**<br>
-Register your provider plugin instance with a clear key. Consumers call `PluginLocator.Get` to obtain that instance and then run its methods. With the `CallPluginB` helper, you get the exact, simple call style demonstrated in your example.
-
----
-
 https://github.com/nasuno/Holodeck<br>
 https://github.com/nasuno/Plugin-Satellite-Cubes<br>
 https://github.com/nasuno/Plugin-SpatialZone-Demo<br>
