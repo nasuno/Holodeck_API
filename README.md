@@ -276,8 +276,12 @@ Groups the triangle under `setId` for batch management.
  `x3, y3, z3` | `Double` | Vertex C position (X, Y, Z) 
  `setId`      | `Integer`| Group identifier for this triangle 
 
-&nbsp;&nbsp;Returns<br>
-`Integer`: Unique `triangleId` assigned to the new triangle. 
+&nbsp;&nbsp;Returns<br> 
+Integer<br> 
+Unique ID (triangleId) for the newly registered triangle.<br> 
+You don’t need to track them if you are tracking the setId. <br> 
+The return is optional. <br> 
+The returned integer uniquely identifies the triangle and can be used for future reference (e.g., lookups in trianglesById).
 
 &nbsp;&nbsp;Plugin use cases<br>
 Define occlusion surfaces for your objects.<br>
