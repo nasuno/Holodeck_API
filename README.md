@@ -782,8 +782,8 @@ zone.SetGutterVisible(0, 1, "above", False)  ' Hide it
 ```
 
 &nbsp;&nbsp;What Happens if I Remove a Zone?<br>
-If you call `api.RemoveSpatialZone(zoneId)`, the host disposes the zone.<br>
-Your plugin reference to the zone object may still exist ("zombie" zone)-use with caution! WIP<br>
+If you call `api.RemoveSpatialZone(zoneId)`, the host disposes the zone.WIP<br>
+Your plugin reference to the zone object may still exist ("zombie" zone)-use with caution! <br>
 Operations after removal may not be tracked by the host and can lead to resource leaks or surprising behavior.
 
 **Use zone references only while zone is alive/managed.**
