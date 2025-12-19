@@ -80,7 +80,7 @@ Dim objId As Integer = api.AddMyObjectToFactory(x, y, z, structureId)
 
 ' Retrieve object from dictionary
 Dim obj As MyObject = Nothing
-If api.objectDictionary. TryGetValue(objId, obj) Then
+If api.objectDictionary.TryGetValue(objId, obj) Then
     obj.ColorOverride = ObjectColor.Red
 End If
 ```
@@ -668,10 +668,10 @@ Margin IDs are unique, descriptive strings made during margin creation.
 &nbsp;&nbsp;Example Pattern<br>
 Step 1: Create margins (names must match your Set call)<br>
 ```vb
-api.CreateMargin("AnotherLayout_TopRow", MarginType. RowMargin, PanelType.TopPanel, 40, Nothing, False)
-api.CreateMargin("AnotherLayout_BottomRow", MarginType. RowMargin, PanelType.TopPanel, 50, Nothing, False)
-api.CreateMargin("AnotherLayout_LeftColumn", MarginType. ColumnMargin, PanelType.TopPanel, Nothing, 22, False)
-api.CreateMargin("AnotherLayout_RightColumn", MarginType. ColumnMargin, PanelType.TopPanel, Nothing, 35, False)
+api.CreateMargin("AnotherLayout_TopRow", MarginType.RowMargin, PanelType.TopPanel, 40, Nothing, False)
+api.CreateMargin("AnotherLayout_BottomRow", MarginType.RowMargin, PanelType.TopPanel, 50, Nothing, False)
+api.CreateMargin("AnotherLayout_LeftColumn", MarginType.ColumnMargin, PanelType.TopPanel, Nothing, 22, False)
+api.CreateMargin("AnotherLayout_RightColumn", MarginType.ColumnMargin, PanelType.TopPanel, Nothing, 35, False)
 ```
 
 Step 2: Create the margin set<br>
@@ -758,7 +758,7 @@ Dim maxCorner = aabb.Item2  ' (maxX, maxY, maxZ)
 Iterate characters by grid position<br>
 ```vb
 For Each kvp In zone.WrappedCharIndex
-    Dim row As Integer = kvp.Key. Item1
+    Dim row As Integer = kvp.Key.Item1
     Dim col As Integer = kvp.Key.Item2
     Dim ch As Char = kvp.Value
     ' Process character at (row, col)
@@ -1279,7 +1279,7 @@ Sub MarginJump(
 
 &nbsp;&nbsp;Usage Rules
 
-**For row margins (`MarginType. RowMargin`):**<br>
+**For row margins (`MarginType.RowMargin`):**<br>
 `newRow`: Must be the target row index<br>
 `newCol`: Must be `Nothing`
 
@@ -1298,7 +1298,7 @@ Before jumping a margin, query the target panel's valid row/column range: (optio
 Dim leftCol   As Integer = api.GetPanelFurthestLeftColumn(PanelType.TopPanel)
 Dim topRow    As Integer = api.GetPanelFurthestTopRow(PanelType.TopPanel)
 Dim rightCol  As Integer = api.GetPanelFurthestRightColumn(PanelType.TopPanel)
-Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType. TopPanel)
+Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType.TopPanel)
 ```
 
   Method                              | Returns
@@ -1321,7 +1321,7 @@ Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType. TopPanel)
 Dim topRow As Integer = api.GetPanelFurthestTopRow(PanelType.EastPanel)
 Dim bottomRow As Integer = api.GetPanelFurthestBottomRow(PanelType.EastPanel)
 
-' Move row margin to row 3 in EastPanel (ensure 3 is within topRow.. bottomRow)
+' Move row margin to row 3 in EastPanel (ensure 3 is within topRow..bottomRow)
 api.MarginJump(
     marginId:="margin_row_1",
     newPanel:=PanelType.EastPanel,
